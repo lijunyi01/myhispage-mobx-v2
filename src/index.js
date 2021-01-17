@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from "mobx-react";
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
+import { HashRouter } from "react-router-dom";
+import rootState from './index.state';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ConfigProvider locale={zhCN}>
+      <Provider {...rootState}>
+        <HashRouter>
+          <App />
+        </HashRouter>
+      </Provider>   
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
