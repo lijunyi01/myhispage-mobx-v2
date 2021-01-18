@@ -45,6 +45,7 @@ module.exports = override(
         "@axios": path.resolve(__dirname, "src/axios"),
         "@pages": path.resolve(__dirname, "src/pages"),
         "@com": path.resolve(__dirname, "src/components"),
+        "@utils": path.resolve(__dirname, "src/utils"),
       }
     }),
     // 百度地图通过index.html 的js引入，需要通过这种方式组件化
