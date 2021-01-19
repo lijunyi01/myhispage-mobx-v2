@@ -1,18 +1,20 @@
-import React from 'react'
-import { Button } from 'antd';
-import { removeToken } from '@utils/auth';
+import React from 'react';
+import Sidelayout from '@/layout/sidelayout';
+import { privateRoutes } from '@/routers';
+import { Switch, Route, Redirect } from 'react-router-dom';
+// import HisMap from '@pages/Home/HisMap';
+// import TimeLine from '@pages/Home/TimeLine';
 
 export default function index(props) {
-    const handleLogOutClick = () => {
-        removeToken();
-        props.history.push('/login');
-    };
+
     return (
-        <div>
-            <h1>Home</h1>
-            <Button type="primary" onClick={handleLogOutClick} >
-                LogOut
-            </Button>
-        </div>
+        <Sidelayout>
+            <Switch>
+                {privateRoutes.map(route => {
+                    return <Route key={route.path} {...route} />
+                })}
+                <Redirect to="/myhis/timeline" />
+            </Switch>
+        </Sidelayout>
     )
 }

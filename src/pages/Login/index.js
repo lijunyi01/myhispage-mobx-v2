@@ -14,11 +14,16 @@ import './index.css';
 import { setToken } from '@utils/auth';
 
 function index(props) {
+    // console.log(props);
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
         setToken('token111');
-        console.log(props)
-        props.history.push('/myhis');
+        if (props.history.location.state) {
+            // console.log("go to:" + props.history.location.state.from.pathname);
+            props.history.push(props.history.location.state.from.pathname);
+        } else {
+            props.history.push('/myhis');
+        }
     };
     return (
         <Card title="Myhis App" className="login-form">

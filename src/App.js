@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import { ConfigProvider } from 'antd';
 import 'antd/dist/antd.css';
 import zhCN from 'antd/es/locale/zh_CN';
@@ -12,12 +12,12 @@ import Home from '@pages/Home';
 
 
 moment.locale("zh-cn");
-
+// 高阶组件，传入的是个对象，形参应用了解构赋值语法（注意不是对象），将传入对象解构并赋值给形参变量
+// 不用单个形参接收入参是因为函数体内有分开使用入参对象各属性的需求，例如{...rest}
 const PrivateRoute = ({ component: Component, location: Location, ...rest }) => {
+  // console.log(Location);
+  console.log('call privateroute');
   if (isLogined()) {
-    // if (!appState.getUserInfo()) {
-    //   appState.getUserInfo();
-    // }
     return (
       <Route {...rest} render={props => <Component {...props} />} />
     );
