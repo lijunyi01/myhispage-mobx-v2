@@ -1,0 +1,29 @@
+#wrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    // overflow: hidden;
+
+    #spindiv {
+        position: absolute;
+        z-index: 10000;
+        top: 50%;
+        left: 50%;
+    }
+
+    .mainlist {
+        width: 240px;
+        height: 100%;
+        background-color: skyblue;
+    }
+
+    #maincontent {
+        height: 100%;
+        // width: calc("100% - 240px");
+        flex: 1;
+        overflow: auto;
+        // position: relative;
+        background-color: pink;
+
+    }
+}

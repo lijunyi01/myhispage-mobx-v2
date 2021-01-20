@@ -18,8 +18,8 @@ ReactDOM.render(
     {/* <Provider {...rootState}> */}
     <BrowserRouter>
       <App />
-    </BrowserRouter>
-    {/* </Provider>    */}
+    </ BrowserRouter>,
+   {/* </Provider>    */}
     {/* </ConfigProvider> */}
   </React.StrictMode>,
   document.getElementById('root')
