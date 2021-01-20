@@ -7,13 +7,11 @@ import {
     VideoCameraOutlined,
     UploadOutlined,
 } from '@ant-design/icons';
-import './sidelayout.css';
+import './siderlayout.css';
 import { Link, withRouter } from "react-router-dom";
 import { removeToken } from '@utils/auth';
 
 const { Header, Sider, Content } = Layout;
-
-@withRouter
 class SiderLayout extends React.Component {
     state = {
         collapsed: false,
@@ -75,4 +73,16 @@ class SiderLayout extends React.Component {
     }
 }
 
-export default SiderLayout;
+// 这里需要用withRouter高阶组件包裹是因为本组件用到了this.props.history对象
+// 且该组件被使用时没有包裹在<Route/> 里
+// return (
+//     <Siderlayout>
+//         <Switch>
+//             {privateRoutes.map(route => {
+//                 return <Route key={route.path} {...route} />
+//             })}
+//             <Redirect to="/myhis/timeline" />
+//         </Switch>
+//     </Siderlayout>
+// )
+export default withRouter(SiderLayout);

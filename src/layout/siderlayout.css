@@ -23,3 +23,8 @@
 #sidelayout .site-layout .site-layout-background {
     background: #fff;
 }
+
+#sidelayout .ant-menu .last-menu {
+    position: fixed;
+    bottom: 10px;
+}

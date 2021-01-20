@@ -8,7 +8,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import moment from "moment";
 import { isLogined } from '@utils/auth';
 import { publicRoutes } from './routers';
-import Home from '@pages/Home';
+import HomeLayoutAndRoute from '@pages/Home/HomeLayoutAndRoute';
 
 
 moment.locale("zh-cn");
@@ -16,7 +16,7 @@ moment.locale("zh-cn");
 // 不用单个形参接收入参是因为函数体内有分开使用入参对象各属性的需求，例如{...rest}
 const PrivateRoute = ({ component: Component, location: Location, ...rest }) => {
   // console.log(Location);
-  console.log('call privateroute');
+  // console.log('call privateroute');
   if (isLogined()) {
     return (
       <Route {...rest} render={props => <Component {...props} />} />
@@ -38,7 +38,8 @@ function App(props) {
         {publicRoutes.map(route => {
           return <Route key={route.path} {...route} />
         })}
-        <PrivateRoute path="/myhis" component={Home} location={props.location} />
+        {/* HomeLayoutAndRoute 是完成登录验证后展示的页面的父级框架组件；PrivateRoute高阶组件内部进行登录是否完成的判断 */}
+        <PrivateRoute path="/myhis" component={HomeLayoutAndRoute} location={props.location} />
         <Redirect to="/myhis" from="/" />
         <Redirect to="/404" />
       </Switch>

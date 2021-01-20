@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 // import { Provider } from "mobx-react";
 // import { ConfigProvider } from 'antd';
 // import zhCN from 'antd/es/locale/zh_CN';
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 // import rootState from './index.state';
 
 ReactDOM.render(
@@ -14,12 +14,12 @@ ReactDOM.render(
   <React.StrictMode>
     {/*  <ConfigProvider locale={zhCN}> 放到App.js去，保持index.js 的单纯 */}
     {/* <ConfigProvider locale={zhCN}> */}
-      {/* 不需要用Provider， 它的功能是将state从顶层注入各组件的props，如非必要不要使用；mobx支持分布式state！*/}
-      {/* <Provider {...rootState}> */}
-        <HashRouter>
-          <App />
-        </HashRouter>
-      {/* </Provider>    */}
+    {/* 不需要用Provider， 它的功能是将state从顶层注入各组件的props，如非必要不要使用；mobx支持分布式state！*/}
+    {/* <Provider {...rootState}> */}
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+    {/* </Provider>    */}
     {/* </ConfigProvider> */}
   </React.StrictMode>,
   document.getElementById('root')
