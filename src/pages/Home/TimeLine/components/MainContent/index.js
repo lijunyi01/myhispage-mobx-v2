@@ -1,9 +1,12 @@
 import React from 'react';
 
-function index() {
+function index(props) {
+    // console.log(props);
     return (
         <div>
-            MainContent
+            MainContent<br />
+            {props.mainContentDivHeight}<br />
+            {props.mainContentDivWidth}
         </div>
     )
 }

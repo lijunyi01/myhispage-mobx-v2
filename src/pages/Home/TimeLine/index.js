@@ -1,22 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react';
-import { Spin, Button } from 'antd';
+// import { Spin, Button } from 'antd';
 import timeLineState from './index.state'
 import { MainList, MainContent } from './components';
 import _ from 'lodash';
 import './index.less';
 
-const Index = (props) => {
+const Index = () => {
 
     const maincontentdivref = useRef(null);
 
     const setCanvasWidth = _.debounce(() => {
 
-        console.log("setCanvasWidth");
+        // console.log("setCanvasWidth");
+        // console.log(timeLineState.mainContentDivWidth);
         let divdom = maincontentdivref.current;
         if (divdom) {
-            let mainContentDivWidth = divdom.offsetWidth;
-            console.log("domWidth:" + mainContentDivWidth);
+            timeLineState.setMainContentDivWidth(divdom.offsetWidth);
+            timeLineState.setMainContentDivHeight(divdom.offsetHeight);
             //     //第一次加载会多算80px（每边24+16）
             //     if(this.isFirstLoaded) {
             //         mainContentDivWidth -= 80;
@@ -31,7 +32,7 @@ const Index = (props) => {
     }, 200);
 
     useEffect(() => {
-        console.log("add listener");
+        // console.log("add listener");
         window.addEventListener(
             'resize',
             // ()=>{
@@ -44,7 +45,7 @@ const Index = (props) => {
         setCanvasWidth();
         // 如果 effect 返回一个函数，React 将会在执行清除操作时调用它；返回的可以是匿名函数
         return function cleanup() {
-            console.log("clean listener");
+            // console.log("clean listener");
             window.removeEventListener(
                 'resize',
                 setCanvasWidth,
@@ -62,7 +63,7 @@ const Index = (props) => {
                 <MainList />
             </div>
             <div ref={maincontentdivref} id="maincontent">
-                <MainContent mainContentDivWidth={300} />
+                <MainContent mainContentDivWidth={timeLineState.mainContentDivWidth} mainContentDivHeight={timeLineState.mainContentDivHeight} />
             </div>
         </div>
     )

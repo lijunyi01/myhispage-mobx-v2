@@ -7,7 +7,9 @@ class timeLineState {
         makeAutoObservable(this);
     }
 
-    test = 0;
+    // main content 这部分（历史线图部分）dom的宽高
+    mainContentDivWidth = 0;
+    mainContentDivHeight = 0;
 
     // changetest = () => {
     //     setInterval(() => {
@@ -16,8 +18,11 @@ class timeLineState {
     //     }, 2000)
     // }
 
-    changetest = () => {
-        this.test++;
+    setMainContentDivWidth = (newValue) => {
+        this.mainContentDivWidth = newValue;
+    }
+    setMainContentDivHeight = (newValue) => {
+        this.mainContentDivHeight = newValue;
     }
 }
 
