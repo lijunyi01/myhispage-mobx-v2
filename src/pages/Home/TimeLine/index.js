@@ -63,6 +63,7 @@ const Index = () => {
                 <MainList />
             </div>
             <div ref={maincontentdivref} id="maincontent">
+                {/* mobx6.0 ，timeLineState 被引入就会被观察，而不用显式注入组件，很方便 */}
                 <MainContent mainContentDivWidth={timeLineState.mainContentDivWidth} mainContentDivHeight={timeLineState.mainContentDivHeight} />
             </div>
         </div>
