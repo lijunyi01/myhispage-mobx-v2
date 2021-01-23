@@ -28,12 +28,27 @@ class SiderLayout extends React.Component {
         this.props.history.push('/login');
     }
 
+    whichSelected = () => {
+        // console.log('location:')
+        // console.log(this.props.location)
+        let pathName = this.props.location.pathname;
+        // console.log(pathName);
+        if (pathName === "/myhis/timeline" || pathName === "/myhis") {
+            return ['1'];
+        } else if (pathName === "/myhis/map") {
+            return ['2'];
+        } else {
+            return ['3'];
+        }
+    }
+
     render() {
         return (
             <Layout id="sidelayout">
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
                     <div className="logo" />
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={this.whichSelected()}>
+                        {/* <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}> */}
                         <Menu.Item key="1" icon={<UserOutlined />}>
                             <Link to="/myhis/timeline" />
                             TimeLine

@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@amap/amap-jsapi-loader@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.npm.taobao.org/@amap/amap-jsapi-loader/download/@amap/amap-jsapi-loader-0.0.7.tgz#76b5cbcc22f6844003474e37eed1dcd879cb117c"
+  integrity sha1-drXLzCL2hEADR0437tHc2HnLEXw=
+
 "@ant-design/colors@^5.0.0":
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/@ant-design/colors/download/@ant-design/colors-5.0.1.tgz?cache=0&sync_timestamp=1607912326029&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40ant-design%2Fcolors%2Fdownload%2F%40ant-design%2Fcolors-5.0.1.tgz#09670f2f44a7473d7bc01be901c48ec10f12c7a4"
