@@ -24,21 +24,31 @@ function Index() {
         }).then((AMap) => {
             map = new AMap.Map('mapContainer', {
                 pitch: 0, // 地图俯仰角度，有效范围 0 度- 83 度
-                viewMode: '3D' // 地图模式
+                viewMode: '3D', // 地图模式
+                center: [113, 35],   // 中心点
+                zoom: 5,  // 缩放级别
+                // layers: [  //使用多个图层。 通过MapType控件设置显示的卫星图能显示底图的文字信息
+                //     new AMap.TileLayer.Satellite({ opacity: 0.5 }),
+                //     // new AMap.TileLayer.RoadNet()
+                // ],
             });
             map.addControl(new AMap.Scale());   // 比例尺
             // map.addControl(new AMap.ToolBar());  // 缩放控件
-            map.addControl(new AMap.MapType({ defaultType: 1 }));
+            const typeControl = new AMap.MapType({ defaultType: 1 })
+            typeControl.hide();
+            map.addControl(typeControl);  // 地图类型选择控件
             map.addControl(new AMap.ControlBar());
             //map.addControl(new AMap.HawkEye()); // 缩略图
             // map.add(new AMap.Marker({
             //     position: map.getCenter()
             // }));
-            let position = [113, 35];
-            map.setCenter(position);
-            map.setZoom(5);
+            // let position = [113, 35];
+            // map.setCenter(position);
+            // map.setZoom(5);
+            // map.setFeatures(['road', 'point']);
             console.log('地图加载完成');
             // mapState.setMap(map);
+            mapState.setMapTypeControl(typeControl);
 
             // setInterval(() => {
             //     map.setZoom(i++);
@@ -51,8 +61,19 @@ function Index() {
 
     useEffect(() => {
         aMapLoad();
-        console.log("useEffect");
+        // console.log("useEffect");
     }, []);
+
+    useEffect(() => {
+        if (mapState.mapTypeControl) {
+            if (mapState.showMapTypeControl) {
+                mapState.mapTypeControl.show();
+            } else {
+                mapState.mapTypeControl.hide();
+            }
+        }
+
+    }, [mapState.showMapTypeControl]);
 
     const handleClick = () => {
         // mapState.map.setCenter([111, 35]);
@@ -61,7 +82,7 @@ function Index() {
 
     return (
         <div id='mapContainer' style={{ height: "100%" }}>
-            <Button id='mapbutton' type='primary' onClick={handleClick}>test</Button>
+            {/* <Button id='mapbutton' type='primary' onClick={handleClick}>test</Button> */}
         </div >
     )
 }

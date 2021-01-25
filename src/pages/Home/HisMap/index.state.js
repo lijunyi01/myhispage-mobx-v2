@@ -7,10 +7,18 @@ class mapState {
         makeAutoObservable(this);
     }
 
-    map = null;
+    // map = null;
+    mapTypeControl = null;
+    showMapTypeControl = false;
 
-    setMap = (newValue) => {
-        this.map = newValue;
+    // setMap = (newValue) => {
+    //     this.map = newValue;
+    // }
+    setMapTypeControl = (newValue) => {
+        this.mapTypeControl = newValue;
+    }
+    toggleShowMapTypeControl = () => {
+        this.showMapTypeControl = !this.showMapTypeControl;
     }
 }
 

@@ -10,6 +10,7 @@ import {
 import './siderlayout.css';
 import { Link, withRouter } from "react-router-dom";
 import { removeToken } from '@utils/auth';
+import MyHeader from '@pages/Home/MyHeader';
 
 const { Header, Sider, Content } = Layout;
 class SiderLayout extends React.Component {
@@ -71,12 +72,15 @@ class SiderLayout extends React.Component {
                             className: 'trigger',
                             onClick: this.toggle,
                         })}
+                        <div style={{ display: "inline-flex", justifyContent: "flex-end", width: "calc(100% - 83px)" }}>
+                            <MyHeader />
+                        </div>
                     </Header>
                     <Content
                         className="site-layout-background"
                         style={{
                             margin: '24px 16px',
-                            padding: 24,
+                            padding: 0,
                             minHeight: 280,
                         }}
                     >
