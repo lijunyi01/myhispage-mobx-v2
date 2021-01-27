@@ -8,8 +8,16 @@ class mapState {
     }
 
     // map = null;
+    // 高德地图的MapType控件对象，用于切换地图模式
     mapTypeControl = null;
+    // 高德地图的ControlBar控件对象，用于旋转地图
+    controlBar = null;
+    // 是否显示高德地图的MapType控件
     showMapTypeControl = false;
+    // 是否显示高德地图的ControlBar控件
+    showControlBar = false;
+    // AMap资源是否加载完成
+    aMapReadyFlag = false;
 
     // setMap = (newValue) => {
     //     this.map = newValue;
@@ -17,8 +25,17 @@ class mapState {
     setMapTypeControl = (newValue) => {
         this.mapTypeControl = newValue;
     }
+    setControlBar = (newValue) => {
+        this.controlBar = newValue;
+    }
     toggleShowMapTypeControl = () => {
         this.showMapTypeControl = !this.showMapTypeControl;
+    }
+    toggleShowControlBar = () => {
+        this.showControlBar = !this.showControlBar;
+    }
+    setAMapReadyFlag = () => {
+        this.aMapReadyFlag = true;
     }
 }
 

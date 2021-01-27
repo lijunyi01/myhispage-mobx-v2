@@ -2,12 +2,10 @@ import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import AMapLoader from '@amap/amap-jsapi-loader';
 import mapState from './index.state';
-import { Button } from 'antd';
+// import { Button } from 'antd';
 import './index.less';
 
 function Index() {
-
-    let map = null;
 
     const aMapLoad = () => {
         AMapLoader.load({
@@ -22,7 +20,7 @@ function Index() {
             //     "version": '1.3.2'  // Loca 版本，缺省 1.3.2
             // },
         }).then((AMap) => {
-            map = new AMap.Map('mapContainer', {
+            let map = new AMap.Map('mapContainer', {
                 pitch: 0, // 地图俯仰角度，有效范围 0 度- 83 度
                 viewMode: '3D', // 地图模式
                 center: [113, 35],   // 中心点
@@ -33,11 +31,13 @@ function Index() {
                 // ],
             });
             map.addControl(new AMap.Scale());   // 比例尺
-            // map.addControl(new AMap.ToolBar());  // 缩放控件
-            const typeControl = new AMap.MapType({ defaultType: 1 })
+            map.addControl(new AMap.ToolBar());  // 缩放控件
+            const typeControl = new AMap.MapType({ defaultType: 1 })  // 地图类型选择控件
             typeControl.hide();
-            map.addControl(typeControl);  // 地图类型选择控件
-            map.addControl(new AMap.ControlBar());
+            map.addControl(typeControl);
+            const controlBar = new AMap.ControlBar();  // 地图倾角、旋转等操作控件
+            controlBar.hide();
+            map.addControl(controlBar);
             //map.addControl(new AMap.HawkEye()); // 缩略图
             // map.add(new AMap.Marker({
             //     position: map.getCenter()
@@ -49,6 +49,8 @@ function Index() {
             console.log('地图加载完成');
             // mapState.setMap(map);
             mapState.setMapTypeControl(typeControl);
+            mapState.setControlBar(controlBar);
+            mapState.setAMapReadyFlag();   // 设置为true
 
             // setInterval(() => {
             //     map.setZoom(i++);
@@ -72,17 +74,43 @@ function Index() {
                 mapState.mapTypeControl.hide();
             }
         }
+    }, [mapState.showMapTypeControl]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    }, [mapState.showMapTypeControl]);
+    useEffect(() => {
+        if (mapState.controlBar) {
+            if (mapState.showControlBar) {
+                mapState.controlBar.show();
+            } else {
+                mapState.controlBar.hide();
+            }
+        }
+    }, [mapState.showControlBar]);  // eslint-disable-line react-hooks/exhaustive-deps
 
-    const handleClick = () => {
-        // mapState.map.setCenter([111, 35]);
-        map.setCenter([111, 35]);
-    }
+    // useEffect(() => {
+    //     console.log("didupdate and didmount");
+    //     if (mapState.mapTypeControl) {
+    //         if (mapState.showMapTypeControl) {
+    //             mapState.mapTypeControl.show();
+    //         } else {
+    //             mapState.mapTypeControl.hide();
+    //         }
+    //     }
+
+    //     if (mapState.controlBar) {
+    //         if (mapState.showControlBar) {
+    //             mapState.controlBar.show();
+    //         } else {
+    //             mapState.controlBar.hide();
+    //         }
+    //     }
+
+    //     // }, [mapState.showControlBar, mapState.showMapTypeControl]);
+    // });
 
     return (
         <div id='mapContainer' style={{ height: "100%" }}>
-            {/* <Button id='mapbutton' type='primary' onClick={handleClick}>test</Button> */}
+            {/* {mapState.showControlBar}
+            {mapState.showMapTypeControl} */}
         </div >
     )
 }
