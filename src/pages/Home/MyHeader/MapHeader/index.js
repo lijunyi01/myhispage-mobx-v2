@@ -6,8 +6,15 @@ import mapState from '@pages/Home/HisMap/index.state';
 function Index() {
 
     const handleLocationClick = () => { };
-    const toggleShowFlag = () => { };
-    const resetCenter = () => { };
+    const toggleShowMarkersFlag = () => {
+        mapState.toggleShowMarkersFlag();
+    };
+    const resetMap = () => {
+        // console.log(mapState.map);
+        // console.log(mapState.defaultCenter);
+        mapState.map.setCenter(mapState.defaultCenter);
+        mapState.map.setZoom(mapState.defaultZoom);
+    };
     // const onMapTypeChange = (e) => {
     //     console.log(e.target.value);
     //     mapState.setMapType(e.target.value);
@@ -30,8 +37,8 @@ function Index() {
         mapState.aMapReadyFlag ?
             <Space>
                 <Button type="primary" onClick={handleLocationClick}>Locations</Button>
-                <Button type="primary" onClick={toggleShowFlag}>ToggleShowFlag</Button>
-                <Button type="primary" onClick={resetCenter}>ResetCenter</Button>
+                <Button type="primary" onClick={toggleShowMarkersFlag}>ToggleShowMarkers</Button>
+                <Button type="primary" onClick={resetMap}>ResetMap</Button>
                 {/* <span>zoomLevel:</span>
                 <span>{zoomLevel}</span> */}
                 <div style={{ width: "80px" }} />

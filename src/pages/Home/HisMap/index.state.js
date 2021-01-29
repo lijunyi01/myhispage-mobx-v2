@@ -7,7 +7,8 @@ class mapState {
         makeAutoObservable(this);
     }
 
-    // map = null;
+    // 高德地图对象
+    map = null;
     // 高德地图的MapType控件对象，用于切换地图模式
     mapTypeControl = null;
     // 高德地图的ControlBar控件对象，用于旋转地图
@@ -18,10 +19,18 @@ class mapState {
     showControlBar = false;
     // AMap资源是否加载完成
     aMapReadyFlag = false;
+    // 地图默认中心点
+    defaultCenter = [113, 33];
+    // 默认缩放级别
+    defaultZoom = 5;
+    // 显示markers 的开关
+    showMarkersFlag = false;
+    // markers 列表
+    markerList = [];
 
-    // setMap = (newValue) => {
-    //     this.map = newValue;
-    // }
+    setMap = (newValue) => {
+        this.map = newValue;
+    }
     setMapTypeControl = (newValue) => {
         this.mapTypeControl = newValue;
     }
@@ -37,6 +46,30 @@ class mapState {
     setAMapReadyFlag = () => {
         this.aMapReadyFlag = true;
     }
+    toggleShowMarkersFlag = () => {
+        this.showMarkersFlag = !this.showMarkersFlag;
+    }
+
+    // generateMarkerList = async (checkedKeys) => {
+    //     // 发请求通过selectedKeys 获得markerList并覆盖当前的markerList
+    //     console.log("param:",checkedKeys)
+    //     if(checkedKeys.length === 0 ){
+    //         this.markerList = [];
+    //         // this.isShowFlag = false;
+    //     }else{
+    //         try{
+    //             const data = {
+    //                 locationIdArray: checkedKeys,
+    //             }
+    //             let res = await getMarkerList(data);
+    //             // console.log("res:",res)
+    //             this.markerList = res.markerList;
+    //             // this.isShowFlag = true;
+    //         }catch (err) {
+    //             console.log(err);
+    //         }           
+    //     }
+    // }
 }
 
 export default new mapState();
