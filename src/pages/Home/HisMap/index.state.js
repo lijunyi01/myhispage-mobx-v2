@@ -26,7 +26,20 @@ class mapState {
     // 显示markers 的开关
     showMarkersFlag = false;
     // markers 列表
-    markerList = [];
+    markerList = [{
+        "markerId": 3,
+        "markerLng": 112.23,
+        "markerLat": 34.32,
+        "infoWindowTitle": "江陵",
+        "infoWindowContent": "千里江陵一日还"
+    },
+    {
+        "markerId": 4,
+        "markerLng": 119.45,
+        "markerLat": 32.2,
+        "infoWindowTitle": "京口",
+        "infoWindowContent": "现镇江"
+    }];
 
     setMap = (newValue) => {
         this.map = newValue;
@@ -43,8 +56,8 @@ class mapState {
     toggleShowControlBar = () => {
         this.showControlBar = !this.showControlBar;
     }
-    setAMapReadyFlag = () => {
-        this.aMapReadyFlag = true;
+    setAMapReadyFlag = (newValue) => {
+        this.aMapReadyFlag = newValue;
     }
     toggleShowMarkersFlag = () => {
         this.showMarkersFlag = !this.showMarkersFlag;

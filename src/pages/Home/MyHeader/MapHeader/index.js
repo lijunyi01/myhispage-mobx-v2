@@ -7,6 +7,7 @@ function Index() {
 
     const handleLocationClick = () => { };
     const toggleShowMarkersFlag = () => {
+        // e.stopPropagation();
         mapState.toggleShowMarkersFlag();
     };
     const resetMap = () => {

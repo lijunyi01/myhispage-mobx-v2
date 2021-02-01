@@ -5,6 +5,8 @@ import mapState from './index.state';
 import { toJS } from 'mobx';
 // import { Button } from 'antd';
 import './index.less';
+import locationMarkerIcon from '@assets/icon/mark_b.png';
+import sharpIcon from '@assets/icon/sharp.png';
 
 function Index() {
 
@@ -44,11 +46,11 @@ function Index() {
             const controlBar = new AMap.ControlBar();  // 地图倾角、旋转等操作控件
             controlBar.hide();
             map.addControl(controlBar);
-            // console.log('地图加载完成');
+            console.log('地图加载完成');
             mapState.setMap(map);
             mapState.setMapTypeControl(typeControl);
             mapState.setControlBar(controlBar);
-            mapState.setAMapReadyFlag();   // 设置为true
+            mapState.setAMapReadyFlag(true);   // 设置为true
 
         }).catch(e => {
             console.log(e);
@@ -57,8 +59,22 @@ function Index() {
 
     useEffect(() => {
         aMapLoad();
-        // console.log('aMapLoad异步执行');
-        // console.log(aMap);
+        return function cleanup() {
+            // console.log('clean up map');
+            mapState.setAMapReadyFlag(false);
+            if (mapState.showMarkersFlag) {
+                mapState.toggleShowMarkersFlag();
+            }
+            if (mapState.showMapTypeControl) {
+                mapState.toggleShowMapTypeControl();
+            }
+            if (mapState.showControlBar) {
+                mapState.toggleShowControlBar();
+            }
+            mapState.setMap(null);
+            mapState.setControlBar(null);
+            mapState.setMapTypeControl(null);
+        };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     // useEffect(() => {
@@ -68,7 +84,8 @@ function Index() {
     // }, [aMap]);
 
     useEffect(() => {
-        if (mapState.mapTypeControl) {
+        // 地图加载完成才操作地图
+        if (mapState.aMapReadyFlag && mapState.mapTypeControl) {
             if (mapState.showMapTypeControl) {
                 mapState.mapTypeControl.show();
             } else {
@@ -78,35 +95,87 @@ function Index() {
     }, [mapState.showMapTypeControl]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        if (mapState.controlBar) {
+        // 地图加载完成才操作地图
+        if (mapState.aMapReadyFlag && mapState.controlBar) {
+            console.log('22');
             if (mapState.showControlBar) {
                 mapState.controlBar.show();
             } else {
                 mapState.controlBar.hide();
             }
         }
+
     }, [mapState.showControlBar]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     const showMarkers = () => {
-        // 构造标记点
-        const marker = new aMap.Marker({
-            icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-            position: toJS(mapState.defaultCenter),
-            anchor: 'bottom-center'
+
+        //构建自定义信息窗体
+        const createInfoWindow = (title, content) => {
+            var info = document.createElement("div");
+            info.className = "custom-info input-card content-window-card";
+
+            //可以通过下面的方式修改自定义窗体的宽高
+            info.style.width = "200px";
+            // 定义顶部标题
+            var top = document.createElement("div");
+            var titleD = document.createElement("div");
+            // var closeX = document.createElement("img");
+            top.className = "info-top";
+            titleD.innerHTML = title;
+            // closeX.src = "https://webapi.amap.com/images/close2.gif";
+            // closeX.onclick = closeInfoWindow;
+
+            top.appendChild(titleD);
+            // top.appendChild(closeX);
+            info.appendChild(top);
+
+            // 定义中部内容
+            var middle = document.createElement("div");
+            middle.className = "info-middle";
+            middle.innerHTML = content;
+            info.appendChild(middle);
+
+            // 定义底部内容
+            var bottom = document.createElement("div");
+            bottom.className = "info-bottom";
+            var sharp = document.createElement("img");
+            // sharp.src = "https://webapi.amap.com/images/sharp.png";
+            sharp.src = sharpIcon;
+            bottom.appendChild(sharp);
+            info.appendChild(bottom);
+            return info;
+        }
+
+        toJS(mapState.markerList).forEach(item => {
+            // 构造标记点
+            const marker = new aMap.Marker({
+                icon: locationMarkerIcon,
+                position: [item.markerLng, item.markerLat],
+                anchor: 'bottom-center',
+            });
+            // 构造矢量圆形
+            const circle = new aMap.Circle({
+                center: new aMap.LngLat(item.markerLng, item.markerLat), // 圆心位置
+                radius: 20000,  //半径
+                strokeColor: "#F33",  //线颜色
+                strokeOpacity: 0.3,  //线透明度
+                strokeWeight: 3,  //线粗细度
+                fillColor: "#ee2200",  //填充颜色
+                fillOpacity: 0.35 //填充透明度
+            });
+            // 信息窗体
+            let content = [];
+            content.push(item.infoWindowContent);
+            const infoWindow = new aMap.InfoWindow({
+                isCustom: true,
+                content: createInfoWindow(item.infoWindowTitle, content.join("<br/>")),
+                offset: new aMap.Pixel(10, -50)
+            });
+            marker.on('mouseover', e => { infoWindow.open(mapState.map, e.target.getPosition()); });
+            marker.on('mouseout', () => { infoWindow.close(); });
+
+            mapState.map.add([circle, marker]);
         });
-        // mapState.map.add([marker]);
-        // 构造矢量圆形
-        const circle = new aMap.Circle({
-            center: new aMap.LngLat("113", "33"), // 圆心位置
-            // center: mapState.defaultCenter,
-            radius: 100000,  //半径
-            strokeColor: "#F33",  //线颜色
-            strokeOpacity: 0.3,  //线透明度
-            strokeWeight: 3,  //线粗细度
-            fillColor: "#ee2200",  //填充颜色
-            fillOpacity: 0.35 //填充透明度
-        });
-        mapState.map.add([circle, marker]);
     };
     const clearMarkers = () => {
         if (mapState.map && mapState.map.getAllOverlays('marker') !== null) {
@@ -114,13 +183,16 @@ function Index() {
         }
     };
     useEffect(() => {
-        // console.log(aMap);
-        if (mapState.showMarkersFlag) {
-            clearMarkers();
-            showMarkers();
-        } else {
-            clearMarkers();
+        // 地图加载完成才操作地图
+        if (mapState.aMapReadyFlag) {
+            if (mapState.showMarkersFlag) {
+                clearMarkers();
+                showMarkers();
+            } else {
+                clearMarkers();
+            }
         }
+
     }, [mapState.showMarkersFlag]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     // useEffect(() => {

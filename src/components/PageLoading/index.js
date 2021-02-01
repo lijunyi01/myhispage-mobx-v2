@@ -1,9 +1,12 @@
 import React from 'react';
 import { Spin } from 'antd';
+import './index.less';
 
 function index() {
     return (
-        <Spin />
+        <div id="spinContainer">
+            <Spin />
+        </div>
     )
 }
 
