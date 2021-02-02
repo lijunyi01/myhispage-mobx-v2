@@ -2,10 +2,10 @@ import React from 'react';
 import { Button, Space, Switch } from 'antd';
 import { observer } from 'mobx-react';
 import mapState from '@pages/Home/HisMap/index.state';
+import SelectLocationDrawer from '@pages/Home/MyHeader/MapHeader/SelectLocation';
 
 function Index() {
 
-    const handleLocationClick = () => { };
     const toggleShowMarkersFlag = () => {
         // e.stopPropagation();
         mapState.toggleShowMarkersFlag();
@@ -33,6 +33,14 @@ function Index() {
         // console.log(`switch to ${checked}`);
     }
 
+    // 切换location select 抽屉的开和关
+    const onLocationSelectDrawerClose = () => {
+        mapState.toggleShowLocationSelectDwawerFlag();
+    }
+    const handleLocationClick = () => {
+        mapState.toggleShowLocationSelectDwawerFlag();
+    };
+
     return (
 
         mapState.aMapReadyFlag ?
@@ -49,7 +57,7 @@ function Index() {
                 </Radio.Group> */}
                 <Switch defaultChecked={false} onChange={onSwitchChange} checkedChildren="地图模式控件开" unCheckedChildren="地图模式控件关" />
                 <Switch defaultChecked={false} onChange={onSwitchChange2} checkedChildren="地图旋转控件开" unCheckedChildren="地图旋转控件关" />
-                {/* <SelectLocationDrawer showFlag={this.state.showLocationSelector} onClose={this.onLocationSelectorClose}/> */}
+                <SelectLocationDrawer showFlag={mapState.showLocationSelectDwawerFlag} onClose={onLocationSelectDrawerClose} />
             </Space >
             :
             <></>

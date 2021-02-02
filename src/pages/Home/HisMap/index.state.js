@@ -25,6 +25,8 @@ class mapState {
     defaultZoom = 5;
     // 显示markers 的开关
     showMarkersFlag = false;
+    // 显示location select 抽屉的开关
+    showLocationSelectDwawerFlag = false;
     // markers 列表
     markerList = [{
         "markerId": 3,
@@ -40,6 +42,80 @@ class mapState {
         "infoWindowTitle": "京口",
         "infoWindowContent": "现镇江"
     }];
+
+    // 地点树的数据
+    locationTreeData = [
+        {
+            title: '中国地名',
+            key: '1',
+            children: [
+                {
+                    title: '城市',
+                    key: '2',
+                    children: [
+                        {
+                            title: '江陵',
+                            key: '3',
+                            children: null
+                        },
+                        {
+                            title: '江夏',
+                            key: '5',
+                            children: null
+                        },
+                        {
+                            title: '京口',
+                            key: '4',
+                        },
+                    ],
+                },
+                {
+                    title: '地点',
+                    key: '6',
+                    children: [
+                        {
+                            title: '桂陵',
+                            key: '8',
+                        },
+                        {
+                            title: '马陵',
+                            key: '9',
+                        },
+                        {
+                            title: '长平',
+                            key: '10',
+                        },
+                    ],
+                },
+                {
+                    title: '关隘',
+                    key: '7',
+                },
+            ],
+        },
+        {
+            title: '外国地名',
+            key: '11',
+            children: [
+                {
+                    title: '0-1-0-0',
+                    key: '13',
+                },
+                {
+                    title: '0-1-0-1',
+                    key: '14',
+                },
+                {
+                    title: '0-1-0-2',
+                    key: '15',
+                },
+            ],
+        },
+        {
+            title: '海洋地名',
+            key: '12',
+        },
+    ];
 
     setMap = (newValue) => {
         this.map = newValue;
@@ -61,6 +137,9 @@ class mapState {
     }
     toggleShowMarkersFlag = () => {
         this.showMarkersFlag = !this.showMarkersFlag;
+    }
+    toggleShowLocationSelectDwawerFlag = () => {
+        this.showLocationSelectDwawerFlag = !this.showLocationSelectDwawerFlag;
     }
 
     // generateMarkerList = async (checkedKeys) => {
