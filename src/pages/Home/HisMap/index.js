@@ -7,6 +7,7 @@ import { toJS } from 'mobx';
 import './index.less';
 import locationMarkerIcon from '@assets/icon/mark_b.png';
 import sharpIcon from '@assets/icon/sharp.png';
+import PageLoading from '@com/PageLoading';
 
 function Index() {
 
@@ -218,8 +219,7 @@ function Index() {
 
     return (
         <div id='mapContainer' style={{ height: "100%" }}>
-            {/* {mapState.showControlBar}
-            {mapState.showMapTypeControl} */}
+            {mapState.aMapReadyFlag ? <></> : <PageLoading show={true} />}
         </div >
     )
 }

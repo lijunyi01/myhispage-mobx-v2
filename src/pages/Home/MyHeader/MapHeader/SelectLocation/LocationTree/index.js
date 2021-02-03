@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Tree, Input } from 'antd';
+import { Tree, Input, Card } from 'antd';
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 // import { EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -28,19 +29,13 @@ function Index() {
   // 从树形json数据中构造出的一维数组（没有了层级关系），形如[{key:1,title:'中国地名'},{key:2,title:'常州'}]
   let [dataList, setDataList] = useState([]);
 
-  // useEffect(() => {
-  //   if (!mapState.showLocationSelectDwawerFlag) {
-  //     setDataList([]);
-  //     setLocationEditMenuData(null);
-  //     setSelectedKeys([]);
-  //     // console.log("drawer exit and use effect");
-  //   } else {
-  //     if (toJS(mapState.locationTreeData).length !== 0 && dataList.length === 0) {
-  //       generateList(mapState.locationTreeData);
-  //       console.log("generateList:", dataList)
-  //     }
-  //   }
-  // }, [mapState.showLocationSelectDwawerFlag]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!mapState.showLocationSelectDwawerFlag) {
+      // 抽屉收起时去掉选中和弹出的操作界面
+      setLocationEditMenuData(null);
+      setSelectedKeys([]);
+    }
+  }, [mapState.showLocationSelectDwawerFlag]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     // if (toJS(mapState.locationTreeData).length !== 0 && dataList.length === 0) {
@@ -81,14 +76,17 @@ function Index() {
   };
 
   const onSelect = (selectedKeys, info) => {
-    // console.log('onSelect info:', info);
-    // console.log("clientWidth:", info.nativeEvent.target.clientWidth);
-    // console.log("selectedKeys:", selectedKeys);
+    console.log('onSelect info:', info);
+    console.log("clientWidth:", info.nativeEvent.target.clientWidth);
+    console.log("selectedKeys:", selectedKeys);
     setSelectedKeys(selectedKeys);
 
     if (selectedKeys.length > 0) {
-      var x = info.nativeEvent.target.offsetLeft + info.nativeEvent.target.clientWidth;
-      var y = info.nativeEvent.target.offsetTop - 2;
+      // var x = info.nativeEvent.target.offsetLeft + info.nativeEvent.target.clientWidth;
+      // var y = info.nativeEvent.target.offsetTop - 2;
+      let x = info.nativeEvent.pageX;
+      let y = info.nativeEvent.pageY;
+      console.log('y:' + y);
       // 1 目录，  2 叶级地址
       var nodeType = 2;
       if (info.node.children) {
@@ -148,26 +146,12 @@ function Index() {
         })
         .filter((item, i, self) => item && self.indexOf(item) === i);
     }
-    console.log("shouldExpandedKeys:", shouldExpandedKeys)
+    // console.log("shouldExpandedKeys:", shouldExpandedKeys)
     setExpandedKeys(shouldExpandedKeys);
     setSearchValue(value);
     // console.log(searchValue);
     setAutoExpandParent(true);
   }, 300)
-
-  // const onRightClick = ({event,node}) => {
-  //   console.log("right click");
-  //   console.log("node in selectLocation:",node);
-  //   var x = event.currentTarget.offsetLeft + event.currentTarget.clientWidth;
-  //   var y = event.currentTarget.offsetTop ;
-  //   setRightClickMenuItem({
-  //       pageX: x,
-  //       pageY: y,
-  //       id: node.props.eventKey,
-  //       name: node.props.title,
-  //       // category: node.props.dataRef.category
-  //   });
-  // }
 
   const loop = data =>
     data.map(item => {
@@ -195,51 +179,58 @@ function Index() {
     }
     );
 
-  // useEffect(()=>{
-  //   return function cleanup() {
-  //     console.log("cleanup in selectLocation")
-  //   };
-  // });
-
   const getLocationEditMenu = () => {
     const { pageX, pageY, nodeType } = locationEditMenuData;
     const tmpStyle = {
       position: 'absolute',
-      // maxHeight: 40,
-      textAlign: 'center',
-      left: `${pageX + 100}px`,
-      top: `${pageY}px`,
-      // display: 'flex',
-      // flexDirection: 'row',
-      background: 'grey',
-      width: '150px',
+      left: `${pageX + 50}px`,
+      top: `${pageY - 10}px`,
       zIndex: '10',
-
     };
-    const menu = (
+    const menu1 = (
       <div
         style={tmpStyle}
       >
-        { nodeType === 1 ?
-          <div style={{ alignSelf: 'center', marginLeft: 5, marginRight: 5, cursor: 'pointer' }} onClick={handleAddSub}>
-            添加
-            </div>
-          :
-          <></>
-        }
-        <div style={{ alignSelf: 'center', marginLeft: 5, marginRight: 5, cursor: 'pointer' }} onClick={handleEditSub}>
-          修改
-          </div>
-        {/* {this.state.NodeTreeItem.category === 1?'':(
-            <div style={{alignSelf: 'center', marginLeft: 10}} onClick={handleDeleteSub}>
-            <Tooltip placement="bottom" title="删除">
-              <Icon type='minus-circle-o' />
-            </Tooltip>
-          </div>
-          )} */}
+        <Card
+          style={{ width: 200 }}
+          bodyStyle={{ backgroundColor: 'black', padding: 5 }}
+          hoverable={true}
+          actions={[
+            <SettingOutlined key="setting" />,
+            <EditOutlined key="edit" onClick={() => { console.log('edit:' + selectedKeys[0]); }} />,
+            <EllipsisOutlined key="ellipsis" />,
+          ]}
+        >
+        </Card>
       </div>
     );
-    return (locationEditMenuData == null) ? '' : menu;
+    const menu2 = (
+      <div
+        style={tmpStyle}
+      >
+        <Card
+          style={{ width: 150 }}
+          bodyStyle={{ backgroundColor: 'black', padding: 5 }}
+          hoverable={true}
+          actions={[
+            <SettingOutlined key="setting" />,
+            <EditOutlined key="edit" onClick={() => { console.log('edit:' + selectedKeys[0]); }} />,
+          ]}
+        >
+        </Card>
+      </div>
+    );
+    const whichMenu = () => {
+      if (locationEditMenuData === null) {
+        return '';
+      } else if (nodeType === 1) {
+        return menu1;
+      } else {
+        return menu2;
+      }
+    }
+    // return (locationEditMenuData == null) ? '' : (nodeType == 1 ? menu1 : menu2);
+    return whichMenu();
   }
 
   const clearLocationEditMenu = () => {
@@ -274,6 +265,7 @@ function Index() {
   }
 
   return (
+    // <div style={{ position: 'relative' }}>
     <div>
       <Search style={{ marginBottom: 8 }} placeholder="Search" onChange={onSearchChange} allowClear />
       <Tree
@@ -286,7 +278,7 @@ function Index() {
         onSelect={onSelect}
         selectedKeys={selectedKeys}
         treeData={loop(toJS(mapState.locationTreeData))}
-        height={400}
+        height={500}
       />
       {locationEditMenuData != null ? getLocationEditMenu() : ""}
       <AddSubLocation

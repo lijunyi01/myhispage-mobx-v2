@@ -67,6 +67,34 @@ class mapState {
                             title: '京口',
                             key: '4',
                         },
+                        {
+                            title: '京口2',
+                            key: '41',
+                        },
+                        {
+                            title: '京口3',
+                            key: '42',
+                        },
+                        {
+                            title: '京口4',
+                            key: '43',
+                        },
+                        {
+                            title: '京口5',
+                            key: '44',
+                        },
+                        {
+                            title: '京口6',
+                            key: '45',
+                        },
+                        {
+                            title: '京口7',
+                            key: '46',
+                        },
+                        {
+                            title: '京口8',
+                            key: '48',
+                        },
                     ],
                 },
                 {
