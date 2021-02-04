@@ -2,7 +2,6 @@ import { makeAutoObservable } from 'mobx';
 import server from './index.server';
 
 const {
-    getAData,       // 接口一
     getLocationTree,  // 地图页面获取地点树形结构的数据
 } = server;
 
@@ -197,14 +196,6 @@ class MapState {
     //         }           
     //     }
     // }
-
-    getDataAMethod = (userName, userId) => {
-        Promise.all([
-            getAData(userName, userId),
-        ]).then(r => {
-            //处理接口拿到的结果
-        })
-    }
 
 
     // Promise.all的写法，多个接口调用，且需要等各接口都返回才处理结果的场景才需要用到
