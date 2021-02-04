@@ -71,8 +71,7 @@ function Index() {
   const onCheck = checkedKeys => {
     console.log('onCheck', checkedKeys);
     setCheckedKeys(checkedKeys);
-    // ljy 暂时去除
-    // appState.mapState.generateMarkerList(checkedKeys);
+    mapState.getMarkerListMethod(checkedKeys);
   };
 
   const onSelect = (selectedKeys, info) => {

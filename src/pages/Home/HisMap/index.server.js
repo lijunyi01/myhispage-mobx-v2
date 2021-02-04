@@ -2,17 +2,17 @@ import request from '@/axios/axios';
 // import config from '@config/config';
 
 // const { BASE_URL } = config;
-const jiekouUrl1 = '/pare_bi_data_process/manage/getAdata';
-const getLocationTreeUrl = 'appinterface/map/getTreeData';
+const getMarkerListUrl = '/appinterface/map/getMarkerList';
+const getLocationTreeUrl = '/appinterface/map/getTreeData';
 
 class Services {
 
-    // 某接口示例
-    getAData = (userName, userId) => {
+    // 通过locationIds 查询markerList
+    getMarkerList = (locationIds) => {
         return request({
-            url: jiekouUrl1,
+            url: getMarkerListUrl,
             method: 'post',
-            data: { userName, userId }
+            data: { "locationIdArray": locationIds }
         })
     }
 

@@ -1,8 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 import server from './index.server';
+import _ from 'lodash';
 
 const {
     getLocationTree,  // 地图页面获取地点树形结构的数据
+    getMarkerList,  // 通过locationIds 查询markerList
 } = server;
 
 class MapState {
@@ -33,20 +35,21 @@ class MapState {
     // 显示location select 抽屉的开关
     showLocationSelectDwawerFlag = false;
     // markers 列表
-    markerList = [{
-        "markerId": 3,
-        "markerLng": 112.23,
-        "markerLat": 34.32,
-        "infoWindowTitle": "江陵",
-        "infoWindowContent": "千里江陵一日还"
-    },
-    {
-        "markerId": 4,
-        "markerLng": 119.45,
-        "markerLat": 32.2,
-        "infoWindowTitle": "京口",
-        "infoWindowContent": "现镇江"
-    }];
+    markerList = [];
+    // markerList = [{
+    //     "markerId": 3,
+    //     "markerLng": 112.23,
+    //     "markerLat": 34.32,
+    //     "infoWindowTitle": "江陵",
+    //     "infoWindowContent": "千里江陵一日还"
+    // },
+    // {
+    //     "markerId": 4,
+    //     "markerLng": 119.45,
+    //     "markerLat": 32.2,
+    //     "infoWindowTitle": "京口",
+    //     "infoWindowContent": "现镇江"
+    // }];
 
     // 地点树的数据
     locationTreeData = [];
@@ -172,8 +175,18 @@ class MapState {
     toggleShowMarkersFlag = () => {
         this.showMarkersFlag = !this.showMarkersFlag;
     }
+    setShowMarkersFlag = (newValue) => {
+        this.showMarkersFlag = newValue;
+    }
     toggleShowLocationSelectDwawerFlag = () => {
         this.showLocationSelectDwawerFlag = !this.showLocationSelectDwawerFlag;
+    }
+
+    setMarkerList = (newValue) => {
+        this.markerList = newValue;
+    }
+    setLocationTreeData = (newValue) => {
+        this.locationTreeData = newValue;
     }
 
     // generateMarkerList = async (checkedKeys) => {
@@ -213,9 +226,22 @@ class MapState {
         getLocationTree().then(res => {
             //处理接口拿到的结果
             // console.log("res:", res);
-            this.locationTreeData = res.locationBeanList;
+            this.setLocationTreeData(res.locationBeanList);
         })
     }
+
+    getMarkerListMethod = _.debounce(locationIds => {
+        if (locationIds.length === 0) {
+            this.setMarkerList([]);
+        } else {
+            getMarkerList(locationIds).then(res => {
+                this.setMarkerList(res.markerList);
+                this.setShowMarkersFlag(true);
+            });
+        }
+    }, 1000);
+
+
 }
 
 export default new MapState();

@@ -76,6 +76,8 @@ function Index() {
             mapState.setMap(null);
             mapState.setControlBar(null);
             mapState.setMapTypeControl(null);
+            mapState.setMarkerList([]);
+            mapState.setLocationTreeData([]);
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -185,6 +187,7 @@ function Index() {
         }
     };
     useEffect(() => {
+        console.log("mapState.markerList:", toJS(mapState.markerList));
         // 地图加载完成才操作地图
         if (mapState.aMapReadyFlag) {
             if (mapState.showMarkersFlag) {
@@ -195,7 +198,7 @@ function Index() {
             }
         }
 
-    }, [mapState.showMarkersFlag]);  // eslint-disable-line react-hooks/exhaustive-deps
+    }, [mapState.showMarkersFlag, mapState.markerList]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     // useEffect(() => {
     //     console.log("didupdate and didmount");
