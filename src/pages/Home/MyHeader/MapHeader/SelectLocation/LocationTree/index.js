@@ -176,8 +176,7 @@ function Index() {
         title,
         key: item.key,
       };
-    }
-    );
+    });
 
   const getLocationEditMenu = () => {
     const { pageX, pageY, nodeType } = locationEditMenuData;

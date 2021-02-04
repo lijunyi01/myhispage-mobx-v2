@@ -60,6 +60,7 @@ function Index() {
 
     useEffect(() => {
         aMapLoad();
+        mapState.getLocationTreeMethod();
         return function cleanup() {
             // console.log('clean up map');
             mapState.setAMapReadyFlag(false);
