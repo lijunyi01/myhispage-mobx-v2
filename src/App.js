@@ -9,6 +9,8 @@ import moment from "moment";
 import { isLogined } from '@utils/auth';
 import { publicRoutes } from './routers';
 import HomeLayoutAndRoute from '@pages/Home/HomeLayoutAndRoute';
+import ApiLoading from '@com/ApiLoading';
+
 
 
 moment.locale("zh-cn");
@@ -34,16 +36,17 @@ const PrivateRoute = ({ component: Component, location: Location, ...rest }) => 
 function App(props) {
   return (
     <ConfigProvider locale={zhCN}>
-      <Switch>
-        {publicRoutes.map(route => {
-          return <Route key={route.path} {...route} />
-        })}
-        {/* HomeLayoutAndRoute 是完成登录验证后展示的页面的父级框架组件；PrivateRoute高阶组件内部进行登录是否完成的判断 */}
-        <PrivateRoute path="/myhis" component={HomeLayoutAndRoute} location={props.location} />
-        <Redirect to="/myhis" from="/" />
-        <Redirect to="/404" />
-      </Switch>
-
+      <ApiLoading>
+        <Switch>
+          {publicRoutes.map(route => {
+            return <Route key={route.path} {...route} />
+          })}
+          {/* HomeLayoutAndRoute 是完成登录验证后展示的页面的父级框架组件；PrivateRoute高阶组件内部进行登录是否完成的判断 */}
+          <PrivateRoute path="/myhis" component={HomeLayoutAndRoute} location={props.location} />
+          <Redirect to="/myhis" from="/" />
+          <Redirect to="/404" />
+        </Switch>
+      </ApiLoading>
     </ConfigProvider>
   );
 }

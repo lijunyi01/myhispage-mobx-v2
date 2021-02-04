@@ -1,6 +1,11 @@
 import { makeAutoObservable } from 'mobx';
+import server from './index.server';
 
-class mapState {
+const {
+    getAData,       // 接口一
+} = server;
+
+class MapState {
 
     // mobx6.0开始state要加这个构造函数; 且属性前不用加@observable,方法前不用加@action
     constructor() {
@@ -190,6 +195,14 @@ class mapState {
     //         }           
     //     }
     // }
+
+    getDataAMethod = (userName, userId) => {
+        Promise.all([
+            getAData(userName, userId),
+        ]).then(r => {
+            //处理接口拿到的结果
+        })
+    }
 }
 
-export default new mapState();
+export default new MapState();

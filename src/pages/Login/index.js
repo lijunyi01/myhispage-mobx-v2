@@ -4,27 +4,63 @@ import {
     Input,
     Button,
     Checkbox,
-    Card
+    Card,
+    Modal
 } from 'antd';
 import {
     UserOutlined,
     LockOutlined
 } from '@ant-design/icons';
 import './index.css';
-import { setToken } from '@utils/auth';
+import { setToken, setUmid } from '@utils/auth';
+import server from './index.server';
+import _ from 'lodash';
+
+const {
+    login,       // 登录接口对应的函数
+} = server;
 
 function index(props) {
     // console.log(props);
+
+    const handleNotAuthorized = _.throttle((message) => {
+        Modal.warn({
+            title: "提示",
+            content: message,
+            onOk() {
+                // 重定向至登录页面
+                // removeToken();
+                // redirectToLogin();
+            }
+        });
+    }, 500);
+
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
-        setToken('token111');
-        if (props.history.location.state) {
-            // console.log("go to:" + props.history.location.state.from.pathname);
-            props.history.push(props.history.location.state.from.pathname);
-        } else {
-            props.history.push('/myhis');
+        // console.log('Received values of form: ', values);
+        const param = {
+            loginName: values.username,
+            loginPwd: values.password,
+            platform: "web"
         }
+        login(param).then(res => {
+            // console.log("login-res:", res)
+            if (res.status === 0) {
+                setToken(res.token)
+                setUmid(res.umid)
+                if (props.history.location.state) {
+                    // console.log("go to:" + props.history.location.state.from.pathname);
+                    props.history.push(props.history.location.state.from.pathname);
+                } else {
+                    props.history.push('/myhis');
+                }
+            } else {
+                handleNotAuthorized(res.messageCode);
+            }
+        }).catch(err => {
+            console.log("catch " + err); // catch error
+        });
     };
+
     return (
         <Card title="Myhis App" className="login-form">
             <Form

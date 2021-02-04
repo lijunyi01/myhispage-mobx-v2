@@ -56,5 +56,7 @@
     "less": "^4.1.0",
     "less-loader": "5.0.0",
     "react-app-rewired": "^2.1.8"
-  }
+  },
+  "proxy": "http://router.cimba.cn:8091"
+
 }
