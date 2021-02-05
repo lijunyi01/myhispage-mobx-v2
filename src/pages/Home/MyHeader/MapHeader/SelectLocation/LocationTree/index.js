@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Tree, Input, Card } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Tree, Input, Card, Modal } from 'antd';
+import { EditOutlined, ExclamationCircleOutlined, SettingOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 // import { EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import AddSubLocation from '../../AddSubLocation/';
 import mapState from '@pages/Home/HisMap/index.state';
 import _ from 'lodash';
+import AddSubLocationModal from '../AddSubLocationModal';
 
 // const { TreeNode } = Tree;
 
@@ -21,7 +21,7 @@ function Index() {
   // 右键弹出的菜单的数据
   const [locationEditMenuData, setLocationEditMenuData] = useState(null);
   // 控制modal的数据
-  const [showAddSubModal, setShowAddSubModal] = useState(true);
+  const [showAddSubModal, setShowAddSubModal] = useState(false);
 
   // 搜索组件
   const { Search } = Input;
@@ -75,9 +75,9 @@ function Index() {
   };
 
   const onSelect = (selectedKeys, info) => {
-    console.log('onSelect info:', info);
-    console.log("clientWidth:", info.nativeEvent.target.clientWidth);
-    console.log("selectedKeys:", selectedKeys);
+    // console.log('onSelect info:', info);
+    // console.log("clientWidth:", info.nativeEvent.target.clientWidth);
+    // console.log("selectedKeys:", selectedKeys);
     setSelectedKeys(selectedKeys);
 
     if (selectedKeys.length > 0) {
@@ -194,9 +194,25 @@ function Index() {
           bodyStyle={{ backgroundColor: 'black', padding: 5 }}
           hoverable={true}
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" onClick={() => { console.log('edit:' + selectedKeys[0]); }} />,
-            <EllipsisOutlined key="ellipsis" />,
+            <PlusOutlined key="add" onClick={() => { setShowAddSubModal(true) }} />,
+            <EditOutlined key="edit" />,
+            <DeleteOutlined key="del" onClick={() => {
+              Modal.confirm({
+                title: '确认删除吗?',
+                icon: <ExclamationCircleOutlined />,
+                content: '',
+                okText: '是',
+                okType: 'danger',
+                cancelText: '否',
+                onOk: () => {
+                  mapState.deleteLocationMethod({ 'selectedKey': selectedKeys[0], 'locationType': 1 }, () => { onSelect([], null) });
+                }
+                ,
+                onCancel() {
+                  // console.log('Cancel');
+                },
+              });
+            }} />,
           ]}
         >
         </Card>
@@ -213,6 +229,23 @@ function Index() {
           actions={[
             <SettingOutlined key="setting" />,
             <EditOutlined key="edit" onClick={() => { console.log('edit:' + selectedKeys[0]); }} />,
+            <DeleteOutlined key="del" onClick={() => {
+              Modal.confirm({
+                title: '确认删除吗?',
+                icon: <ExclamationCircleOutlined />,
+                content: '',
+                okText: '是',
+                okType: 'danger',
+                cancelText: '否',
+                onOk: () => {
+                  mapState.deleteLocationMethod({ 'selectedKey': selectedKeys[0], 'locationType': 0 }, () => { onSelect([], null) });
+                }
+                ,
+                onCancel() {
+                  // console.log('Cancel');
+                },
+              });
+            }} />,
           ]}
         >
         </Card>
@@ -235,32 +268,30 @@ function Index() {
     setLocationEditMenuData(null)
   }
 
-  const handleAddSub = () => {
-    // 写自己的业务逻辑
-    setShowAddSubModal(true);
-    // clearLocationEditMenu();
-    // setSelectedKeys([]);
-  }
+  // const handleAddSub = () => {
+  //   // 写自己的业务逻辑
+  //   setShowAddSubModal(true);
+  //   // clearLocationEditMenu();
+  //   // setSelectedKeys([]);
+  // }
 
-  const handleEditSub = () => {
-    // 写自己的业务逻辑
-  }
+  // const handleEditSub = () => {
+  //   // 写自己的业务逻辑
+  // }
 
-  const handleDeleteSub = () => {
-    // 写自己的业务逻辑
-  }
+  // const handleDeleteSub = () => {
+  //   // 写自己的业务逻辑
+  // }
 
-  const onAddSubModalClose = () => {
-    setShowAddSubModal(false);
-  }
+  // const onAddSubModalClose = () => {
+  //   setShowAddSubModal(false);
+  // }
 
-  const onAddSubModalSubmit = values => {
-    let param = { ...values, selectedKey: selectedKeys[0] }
-    console.log("on submit:", param);
-    // ljy 暂时去除
-    // appState.mapState.addLocation(param);
-    setShowAddSubModal(false);
-  }
+  // const onAddSubModalSubmit = values => {
+  //   let param = { ...values, selectedKey: selectedKeys[0] }
+  //   console.log("on submit:", param);
+  //   setShowAddSubModal(false);
+  // }
 
   return (
     // <div style={{ position: 'relative' }}>
@@ -279,11 +310,12 @@ function Index() {
         height={500}
       />
       {locationEditMenuData != null ? getLocationEditMenu() : ""}
-      {/* <AddSubLocation
-        visible={showAddSubModal}
-        onCancel={onAddSubModalClose}
-        submitMap={onAddSubModalSubmit}
-      /> */}
+      <AddSubLocationModal
+        locationId={selectedKeys.length > 0 ? selectedKeys[0] : -1}
+        showFlag={showAddSubModal}
+        onClose={() => { setShowAddSubModal(false) }}
+        onSubmit={param => { mapState.addLocationMethod(param, () => { setShowAddSubModal(false); onSelect([], null) }) }}
+      />
     </div>
   )
 }

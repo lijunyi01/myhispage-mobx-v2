@@ -6,7 +6,6 @@ import { Drawer } from 'antd';
 import LocationTree from './LocationTree';
 // import { getTreeData } from '@/axios/api';
 import './index.less';
-import AddSubLocationModal from './AddSubLocationModal';
 
 function Index(props) {
 
@@ -23,7 +22,6 @@ function Index(props) {
             headerStyle={{ background: "#329b26" }}
         >
             <LocationTree />
-            <AddSubLocationModal />
         </Drawer>
 
     )

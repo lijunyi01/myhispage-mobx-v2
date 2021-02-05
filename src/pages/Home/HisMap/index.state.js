@@ -5,6 +5,8 @@ import _ from 'lodash';
 const {
     getLocationTree,  // 地图页面获取地点树形结构的数据
     getMarkerList,  // 通过locationIds 查询markerList
+    addLocation,    // 向地点树形结构中添加内容（目录或地址）
+    deleteLocation,  // 在地点树形结构中删除内容（目录或地址）
 } = server;
 
 class MapState {
@@ -39,7 +41,7 @@ class MapState {
     // 地点树的数据
     locationTreeData = [];
     // 新增地点的modal框是否显示
-    showAddSubLocationModalFlag = true;
+    // showAddSubLocationModalFlag = false;
 
 
     setMap = (newValue) => {
@@ -76,9 +78,9 @@ class MapState {
     setLocationTreeData = (newValue) => {
         this.locationTreeData = newValue;
     }
-    setShowAddSubLocationModalFlag = (newValue) => {
-        this.showAddSubLocationModalFlag = newValue;
-    }
+    // setShowAddSubLocationModalFlag = (newValue) => {
+    //     this.showAddSubLocationModalFlag = newValue;
+    // }
 
 
     // Promise.all的写法，多个接口调用，且需要等各接口都返回才处理结果的场景才需要用到
@@ -110,6 +112,28 @@ class MapState {
             });
         }
     }, 1000);
+
+    addLocationMethod = (param, callback) => {
+        addLocation(param).then(res => {
+            //处理接口拿到的结果
+            // console.log("res:", res);
+            if (res.status === 0) {
+                this.getLocationTreeMethod();
+                callback();
+            }
+        })
+    }
+
+    deleteLocationMethod = (param, callback) => {
+        deleteLocation(param).then(res => {
+            //处理接口拿到的结果
+            console.log("res:", res);
+            if (res.status === 0) {
+                this.getLocationTreeMethod();
+                callback();
+            }
+        })
+    }
 
 
 }

@@ -1,28 +1,48 @@
 import React, { useState } from 'react';
-import { Modal, Form, Radio, Input } from 'antd';
-import { observer } from 'mobx-react';
-import mapState from '@pages/Home/HisMap/index.state';
+import { Modal, Form, Radio, Input, Button } from 'antd';
+// import { observer } from 'mobx-react';
+// import mapState from '@pages/Home/HisMap/index.state';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+// import ApiLoading from '@com/ApiLoading';
 
-function Index() {
+function Index(props) {
 
-    const [radioValue, setRadioValue] = useState(-1);
+    const [radioValue, setRadioValue] = useState(0);
 
-    const onRadioChange = (value) => {
-        setRadioValue(value);
+    const onRadioChange = e => {
+        setRadioValue(e.target.value);
     };
-    const onFinish = () => { };
-
-    const onModalCancel = () => {
-        mapState.setShowAddSubLocationModalFlag(false);
+    const onFinish = values => {
+        // console.log("onFinish:", { ...values, selectedKey: props.locationId });
+        Modal.confirm({
+            title: '确认提交吗?',
+            icon: <ExclamationCircleOutlined />,
+            content: '',
+            okText: '是',
+            okType: 'danger',
+            cancelText: '否',
+            onOk: () => {
+                // console.log('Ok');
+                props.onSubmit({ ...values, selectedKey: props.locationId });
+            }
+            ,
+            onCancel() {
+                // console.log('Cancel');
+            },
+        });
     };
+
+    // const onModalCancel = () => {
+    //     mapState.setShowAddSubLocationModalFlag(false);
+    // };
 
     const formItemLayout = {
         labelCol: {
             xs: {
-                span: 24,
+                span: 18,
             },
             sm: {
-                span: 8,
+                span: 6,
             },
         },
         wrapperCol: {
@@ -34,18 +54,22 @@ function Index() {
             },
         },
     };
+    const formItemTailLayout = {
+        wrapperCol: { offset: 6, span: 16 },
+    };
 
     return (
         <Modal
-            visible={mapState.showAddSubLocationModalFlag}
-            title="Add Sub Location"
-            onCancel={onModalCancel}
+            visible={props.showFlag}
+            title={"Add Sub Location: " + props.locationId}
+            onCancel={props.onClose}
+            footer={null}
         >
             <Form
                 name="add sub location"
-                // initialValues={{
-                //     remember: true,
-                // }}
+                initialValues={{
+                    locationType: 0,
+                }}
                 {...formItemLayout}
                 onFinish={onFinish}
             >
@@ -54,7 +78,7 @@ function Index() {
                     label="type"
                     rules={[{ required: true }]}
                 >
-                    <Radio.Group onChange={onRadioChange} value={radioValue}>
+                    <Radio.Group onChange={onRadioChange}>
                         <Radio value={0}>地址</Radio>
                         <Radio value={1}>目录</Radio>
                     </Radio.Group>
@@ -98,12 +122,18 @@ function Index() {
                         >
                             <Input />
                         </Form.Item>
+
                     </>
                 }
+                <Form.Item {...formItemTailLayout}>
+                    <Button type="primary" htmlType="submit" style={{ 'width': '50%', 'float': 'right' }}>
+                        确定
+                    </Button>
+                </Form.Item>
             </Form>
 
         </Modal>
     )
 }
 
-export default observer(Index);
+export default Index;
