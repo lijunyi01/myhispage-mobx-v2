@@ -36,7 +36,89 @@ class MapState {
     showLocationSelectDwawerFlag = false;
     // markers 列表
     markerList = [];
-    // markerList = [{
+    // 地点树的数据
+    locationTreeData = [];
+    // 新增地点的modal框是否显示
+    showAddSubLocationModalFlag = true;
+
+
+    setMap = (newValue) => {
+        this.map = newValue;
+    }
+    setMapTypeControl = (newValue) => {
+        this.mapTypeControl = newValue;
+    }
+    setControlBar = (newValue) => {
+        this.controlBar = newValue;
+    }
+    toggleShowMapTypeControl = () => {
+        this.showMapTypeControl = !this.showMapTypeControl;
+    }
+    toggleShowControlBar = () => {
+        this.showControlBar = !this.showControlBar;
+    }
+    setAMapReadyFlag = (newValue) => {
+        this.aMapReadyFlag = newValue;
+    }
+    toggleShowMarkersFlag = () => {
+        this.showMarkersFlag = !this.showMarkersFlag;
+    }
+    setShowMarkersFlag = (newValue) => {
+        this.showMarkersFlag = newValue;
+    }
+    toggleShowLocationSelectDwawerFlag = () => {
+        this.showLocationSelectDwawerFlag = !this.showLocationSelectDwawerFlag;
+    }
+
+    setMarkerList = (newValue) => {
+        this.markerList = newValue;
+    }
+    setLocationTreeData = (newValue) => {
+        this.locationTreeData = newValue;
+    }
+    setShowAddSubLocationModalFlag = (newValue) => {
+        this.showAddSubLocationModalFlag = newValue;
+    }
+
+
+    // Promise.all的写法，多个接口调用，且需要等各接口都返回才处理结果的场景才需要用到
+    // getLocationTreeMethod = () => {
+    //     Promise.all([
+    //         getLocationTree(),
+    //     ]).then(res => {
+    //         //处理接口拿到的结果
+    //         // console.log("res:", res);
+    //         this.locationTreeData = res[0].locationBeanList;
+    //     })
+    // }
+
+    getLocationTreeMethod = () => {
+        getLocationTree().then(res => {
+            //处理接口拿到的结果
+            // console.log("res:", res);
+            this.setLocationTreeData(res.locationBeanList);
+        })
+    }
+
+    getMarkerListMethod = _.debounce(locationIds => {
+        if (locationIds.length === 0) {
+            this.setMarkerList([]);
+        } else {
+            getMarkerList(locationIds).then(res => {
+                this.setMarkerList(res.markerList);
+                this.setShowMarkersFlag(true);
+            });
+        }
+    }, 1000);
+
+
+}
+
+export default new MapState();
+
+
+
+// markerList = [{
     //     "markerId": 3,
     //     "markerLng": 112.23,
     //     "markerLat": 34.32,
@@ -51,8 +133,7 @@ class MapState {
     //     "infoWindowContent": "现镇江"
     // }];
 
-    // 地点树的数据
-    locationTreeData = [];
+
     // locationTreeData = [
     //     {
     //         title: '中国地名',
@@ -153,95 +234,3 @@ class MapState {
     //         key: '12',
     //     },
     // ];
-
-    setMap = (newValue) => {
-        this.map = newValue;
-    }
-    setMapTypeControl = (newValue) => {
-        this.mapTypeControl = newValue;
-    }
-    setControlBar = (newValue) => {
-        this.controlBar = newValue;
-    }
-    toggleShowMapTypeControl = () => {
-        this.showMapTypeControl = !this.showMapTypeControl;
-    }
-    toggleShowControlBar = () => {
-        this.showControlBar = !this.showControlBar;
-    }
-    setAMapReadyFlag = (newValue) => {
-        this.aMapReadyFlag = newValue;
-    }
-    toggleShowMarkersFlag = () => {
-        this.showMarkersFlag = !this.showMarkersFlag;
-    }
-    setShowMarkersFlag = (newValue) => {
-        this.showMarkersFlag = newValue;
-    }
-    toggleShowLocationSelectDwawerFlag = () => {
-        this.showLocationSelectDwawerFlag = !this.showLocationSelectDwawerFlag;
-    }
-
-    setMarkerList = (newValue) => {
-        this.markerList = newValue;
-    }
-    setLocationTreeData = (newValue) => {
-        this.locationTreeData = newValue;
-    }
-
-    // generateMarkerList = async (checkedKeys) => {
-    //     // 发请求通过selectedKeys 获得markerList并覆盖当前的markerList
-    //     console.log("param:",checkedKeys)
-    //     if(checkedKeys.length === 0 ){
-    //         this.markerList = [];
-    //         // this.isShowFlag = false;
-    //     }else{
-    //         try{
-    //             const data = {
-    //                 locationIdArray: checkedKeys,
-    //             }
-    //             let res = await getMarkerList(data);
-    //             // console.log("res:",res)
-    //             this.markerList = res.markerList;
-    //             // this.isShowFlag = true;
-    //         }catch (err) {
-    //             console.log(err);
-    //         }           
-    //     }
-    // }
-
-
-    // Promise.all的写法，多个接口调用，且需要等各接口都返回才处理结果的场景才需要用到
-    // getLocationTreeMethod = () => {
-    //     Promise.all([
-    //         getLocationTree(),
-    //     ]).then(res => {
-    //         //处理接口拿到的结果
-    //         // console.log("res:", res);
-    //         this.locationTreeData = res[0].locationBeanList;
-    //     })
-    // }
-
-    getLocationTreeMethod = () => {
-        getLocationTree().then(res => {
-            //处理接口拿到的结果
-            // console.log("res:", res);
-            this.setLocationTreeData(res.locationBeanList);
-        })
-    }
-
-    getMarkerListMethod = _.debounce(locationIds => {
-        if (locationIds.length === 0) {
-            this.setMarkerList([]);
-        } else {
-            getMarkerList(locationIds).then(res => {
-                this.setMarkerList(res.markerList);
-                this.setShowMarkersFlag(true);
-            });
-        }
-    }, 1000);
-
-
-}
-
-export default new MapState();

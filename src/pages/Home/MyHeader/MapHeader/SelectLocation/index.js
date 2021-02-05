@@ -6,27 +6,9 @@ import { Drawer } from 'antd';
 import LocationTree from './LocationTree';
 // import { getTreeData } from '@/axios/api';
 import './index.less';
+import AddSubLocationModal from './AddSubLocationModal';
 
 function Index(props) {
-
-    // const [treeData, setTreeData] = useState([]);
-
-    // useEffect(() => {
-    //     // async function getMyTreeData(){
-    //     //     console.log("in nav2 modals selectlocation showFlag:",props.showFlag)
-    //     //     // console.log("in nav2 modals selectlocation treeData:",treeData)
-    //     //     if(props.showFlag) {
-    //     //         try{
-    //     //             const result = await getTreeData({});
-    //     //             // console.log("get tree Data:",result);
-    //     //             setTreeData(result.locationBeanList);
-    //     //         }catch(err){
-    //     //             console.log("get treeData error:",err);
-    //     //         }
-    //     //     }
-    //     // }
-    //     // getMyTreeData();
-    // }, [props.showFlag]);
 
     return (
 
@@ -41,6 +23,7 @@ function Index(props) {
             headerStyle={{ background: "#329b26" }}
         >
             <LocationTree />
+            <AddSubLocationModal />
         </Drawer>
 
     )

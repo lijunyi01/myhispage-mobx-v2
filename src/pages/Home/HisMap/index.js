@@ -200,27 +200,6 @@ function Index() {
 
     }, [mapState.showMarkersFlag, mapState.markerList]);  // eslint-disable-line react-hooks/exhaustive-deps
 
-    // useEffect(() => {
-    //     console.log("didupdate and didmount");
-    //     if (mapState.mapTypeControl) {
-    //         if (mapState.showMapTypeControl) {
-    //             mapState.mapTypeControl.show();
-    //         } else {
-    //             mapState.mapTypeControl.hide();
-    //         }
-    //     }
-
-    //     if (mapState.controlBar) {
-    //         if (mapState.showControlBar) {
-    //             mapState.controlBar.show();
-    //         } else {
-    //             mapState.controlBar.hide();
-    //         }
-    //     }
-
-    //     // }, [mapState.showControlBar, mapState.showMapTypeControl]);
-    // });
-
     return (
         <div id='mapContainer' style={{ height: "100%" }}>
             {mapState.aMapReadyFlag ? <></> : <PageLoading show={true} />}

@@ -21,7 +21,7 @@ function Index() {
   // 右键弹出的菜单的数据
   const [locationEditMenuData, setLocationEditMenuData] = useState(null);
   // 控制modal的数据
-  const [showAddSubModal, setShowAddSubModal] = useState(false);
+  const [showAddSubModal, setShowAddSubModal] = useState(true);
 
   // 搜索组件
   const { Search } = Input;
@@ -279,13 +279,11 @@ function Index() {
         height={500}
       />
       {locationEditMenuData != null ? getLocationEditMenu() : ""}
-      <AddSubLocation
+      {/* <AddSubLocation
         visible={showAddSubModal}
         onCancel={onAddSubModalClose}
         submitMap={onAddSubModalSubmit}
-      // projectId={activedProjectId}
-      // currentDetailData={this.state.editProjectModalInitData}
-      />
+      /> */}
     </div>
   )
 }
