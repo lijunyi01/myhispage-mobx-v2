@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react';
 // import { Spin, Button } from 'antd';
 import timeLineState from './index.state'
-import { MainList, MainContent } from './components';
+import MainList from './MainList';
+import MainContent from './MainContent';
 import _ from 'lodash';
 import './index.less';
 

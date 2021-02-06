@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Tree, Input, Card, Modal } from 'antd';
-import { EditOutlined, ExclamationCircleOutlined, SettingOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, ExclamationCircleOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 // import { EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -185,7 +185,7 @@ function Index() {
       top: `${pageY - 10}px`,
       zIndex: '10',
     };
-    const menu1 = (
+    const menuForDir = (
       <div
         style={tmpStyle}
       >
@@ -218,7 +218,7 @@ function Index() {
         </Card>
       </div>
     );
-    const menu2 = (
+    const menuForLocation = (
       <div
         style={tmpStyle}
       >
@@ -227,8 +227,7 @@ function Index() {
           bodyStyle={{ backgroundColor: 'black', padding: 5 }}
           hoverable={true}
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" onClick={() => { console.log('edit:' + selectedKeys[0]); }} />,
+            <EditOutlined key="edit" />,
             <DeleteOutlined key="del" onClick={() => {
               Modal.confirm({
                 title: '确认删除吗?',
@@ -255,9 +254,9 @@ function Index() {
       if (locationEditMenuData === null) {
         return '';
       } else if (nodeType === 1) {
-        return menu1;
+        return menuForDir;
       } else {
-        return menu2;
+        return menuForLocation;
       }
     }
     // return (locationEditMenuData == null) ? '' : (nodeType == 1 ? menu1 : menu2);

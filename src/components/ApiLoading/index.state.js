@@ -13,7 +13,7 @@ class LoadingState {
     loadingRequestsCount = 0;
 
     showLoading = (changeStatus = true) => {
-        console.log('set apiLoading true');
+        // console.log('set apiLoading true');
         //changeStatus = true 时，当原本的loadingRequestsCount值为0时，需要将apiLoading标志位改为true
         if (this.loadingRequestsCount === 0 && changeStatus) {
             this.apiLoading = true;

@@ -62,7 +62,7 @@ service.interceptors.request.use(
         if (getUmid()) {
             config.headers['Umid'] = getUmid();
         }
-        console.log("showLoading");
+        // console.log("showLoading");
         loadingState.showLoading();
         return config;
     },
@@ -81,7 +81,7 @@ service.interceptors.response.use(
         // 能进入这里，一定是：response.status === 200；有错误也是业务层面的错误
         const data = response.data;
         loadingState.hideLoading();
-        console.log("resdata:", data);
+        // console.log("resdata:", data);
         if (data.status !== 0) {
             // 业务错误，status为非0；开发环境下额外弹信息框提示一下
             handleError(data.messageCode);
