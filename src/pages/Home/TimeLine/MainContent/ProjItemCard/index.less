@@ -1,0 +1,148 @@
+.projItemCard {
+    width: calc(35% - 40px);
+    //width: 35%;
+    // height: auto;
+    min-height: 80px;
+    border: 5px solid #BC8F8F;
+    position: absolute;
+    z-index: auto;
+    background-color: #FFFAFA;
+    cursor: pointer;
+    //-webkit-transition: height 5s;
+    //-moz-transition: height 5s;
+    //-ms-transition: height 5s;
+    //-o-transition: height 5s;
+    //transition: height 5s;;
+    .itemNameArea {
+        width: 100%;
+        height: 30px;
+        border-bottom: 1px solid #adadad;
+        //background-color: #adadad;
+        display: flex;
+        .tFlag{
+            width: 10%;
+        }
+        .itemName {
+            width: 80%;
+            text-align: center;
+            overflow: hidden;
+            //background-color: #a6e1ec;
+        }
+        .fFlag{
+            width: 10%;
+        }
+    }
+    .itemDes{
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid #adadad;
+        text-align: center;
+        //background-color: #c1e2b3;
+        overflow: hidden;
+    }
+    .itemTips{
+        display: none;
+    }
+    .itemTime {
+        width: 100%;
+        height: 0%;
+        display: none;
+    }
+    .itemButtons{
+        width: 100%;
+        height: 0%;
+        display: none;
+    }
+}
+
+.projItemCard:hover {
+    z-index: 1000;
+    color: #fff;
+    background-color: #4cae4c;
+    height: auto;
+    .itemNameArea {
+        height: auto;
+        min-height: 25px;
+        .itemName {
+            height: auto;
+        }
+        .fFlag{
+            width: 10%;
+        }
+    }
+    .itemDes{
+        height: auto;
+        min-height: 50px;
+        border-bottom: 1px solid #adadad;
+    }
+    .itemTips{
+        height: auto;
+        display: block;
+    }
+    .itemTime {
+        width: 100%;
+        height: 25px;
+        display: flex;
+        border-bottom: 1px solid #adadad;
+        text-align: center;
+        .startYear{
+            width: 33%;
+            border-right: 1px solid #adadad;
+        }
+        .periodYear{
+            width: 34%;
+            border-right: 1px solid #adadad;
+            background-color: red;
+        }
+        .endYear{
+            width: 33%;
+        }
+        .spotYear{
+            width: 100%;
+        }
+    }
+    .itemButtons {
+        width: 100%;
+        height: 25px;
+        display: flex;
+        padding-left: 10px;
+        text-align: center;
+
+        .button1 {
+            width: 25%;
+            height: 24px;
+            //margin: 0 auto;
+            // background: url("../images/delete_white.png") no-repeat;
+        }
+        .button1:hover {
+            // background: url("../images/delete_solid_white.png") no-repeat;
+        }
+        .button2 {
+            width: 25%;
+            height: 24px;
+            //margin: 0 auto;
+            // background: url("../images/delete_white.png") no-repeat;
+        }
+        .button2:hover {
+            // background: url("../images/delete_solid_white.png") no-repeat;
+        }
+        .button3 {
+            width: 25%;
+            height: 24px;
+            //margin: 0 auto;
+            // background: url("../images/delete_white.png") no-repeat;
+        }
+        .button3:hover {
+            // background: url("../images/delete_solid_white.png") no-repeat;
+        }
+        .button4 {
+            width: 25%;
+            height: 24px;
+            //margin: 0 auto;
+            // background: url("../images/delete_white.png") no-repeat;
+        }
+        .button4:hover {
+            // background: url("../images/delete_solid_white.png") no-repeat;
+        }
+    }
+}
