@@ -70,11 +70,11 @@ function Index(props) {
         let { projectItems } = canvasParam;
 
         if (projectItems[index].itemType < 3) {    //点事件
-            leftPos = (projectItems[index].startYear - timeLineBeginYear) * pxPerYear - 40 + marginLeft;
+            leftPos = (projectItems[index].startYear - timeLineBeginYear) * pxPerYear - 120 + marginLeft;
         } else {       //段事件
             let rectLeftX = (projectItems[index].startYear - timeLineBeginYear) * pxPerYear + marginLeft;
             let rectWidth = (projectItems[index].endYear - projectItems[index].startYear) * pxPerYear;
-            leftPos = rectLeftX + rectWidth / 2 - 40;
+            leftPos = rectLeftX + rectWidth / 2 - 120;
         }
 
         return leftPos;
