@@ -3,7 +3,8 @@ import { observer } from 'mobx-react';
 // import { Spin, Button } from 'antd';
 import timeLineState from './index.state'
 import MainList from './MainList';
-import MainContent from './MainContent';
+// import MainContent from './MainContent';
+import MainContent from './MainContentLand';
 import _ from 'lodash';
 import './index.less';
 
