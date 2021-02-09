@@ -24,15 +24,18 @@ function Index(props) {
     let itemInMainParam = {};
     const getLeftPos = (index, topPos, timeLineBeginYear, pxPerYear) => {
 
-        // let itemList = containerState.projectContents[projectId];
-
         // 列表区右侧整个区域的宽度，canvas只是其中的30%宽度
         let { mainContentDivWidth } = props
+        // console.log("mainContentDivWidth", mainContentDivWidth);
+
+        const centerX = mainContentDivWidth / 2;
+        const canvasContainerWidth = mainContentDivWidth * 0.3;
 
         let leftPos;
 
-        if (index % 2 === 0) {
-            leftPos = 40;
+        if (index % 2 === 0) {   // 偶数项，在左边
+            leftPos = centerX - canvasContainerWidth / 2 - 235;
+            // 以下是进行错位处理
             if (index >= 2) {
                 if (topPos === itemInMainParam[index - 2].topPos) {
                     leftPos = itemInMainParam[index - 2].leftPos - 15;
@@ -44,9 +47,9 @@ function Index(props) {
                 }
 
             }
-        } else {
-            // leftPos = canvasWidth/0.3*0.65;
-            leftPos = mainContentDivWidth * 0.65;
+        } else {   // 偶数项，在右边
+            leftPos = leftPos = centerX + canvasContainerWidth / 2 - 1;
+            // 以下是进行错位处理
             if (index >= 2) {
                 if (topPos === itemInMainParam[index - 2].topPos) {
                     leftPos = itemInMainParam[index - 2].leftPos + 15;
@@ -99,7 +102,6 @@ function Index(props) {
                 < div className="canvas-container" style={{ height: canvasHeight + 10 }}>
                     <MyCanvas {...canvasParam} canvasWidth={props.mainContentDivWidth * 0.3} canvasHeight={canvasHeight} />
                 </div >
-
             </div >
             :
             ''

@@ -11,6 +11,7 @@ import './siderlayout.css';
 import { Link, withRouter } from "react-router-dom";
 import { removeToken } from '@utils/auth';
 import MyHeader from '@pages/Home/MyHeader';
+import timeLineState from '@pages/Home/TimeLine/index.state';
 
 const { Header, Sider, Content } = Layout;
 class SiderLayout extends React.Component {
@@ -22,6 +23,7 @@ class SiderLayout extends React.Component {
         this.setState({
             collapsed: !this.state.collapsed,
         });
+        timeLineState.toogleLayoutMenuModelFlag();
     };
 
     handleLogout = () => {

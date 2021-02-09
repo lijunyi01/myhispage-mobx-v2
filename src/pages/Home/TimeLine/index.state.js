@@ -24,15 +24,19 @@ class timeLineState {
     // 当前project id 对应的items
     activedProjectItems = [];
     // 当前project id项目历史轴每像素表示几年
-    pxPerYear = -1;
+    pxPerYear = 1;
     // 当前project id项目历史轴每像素表示几年(原始值，由后端决定，每个项目该值可能不同)
-    pxPerYearOrg = -1;
+    pxPerYearOrg = 1;
     // 当前project id 对应的其它数据
     activedProjectData = null;
     // 标识canvas内容发生了变化的变量（只观察该变量进行重新渲染，避免多个数据变化导致渲染多次）
     canvasChangeCount = -1;
     // mainContent 的横屏、竖屏模式    true: 横屏、默认   false:竖屏
     mainContentModelFlag = true;
+    // mainList 的显示隐藏模式    true：显示、默认   false：隐藏
+    mainListModelFlag = true;
+    // layout左边主菜单模式   true: 伸展、默认   false：收缩
+    layoutMenuModelFlag = true;
 
     setMainContentDivWidth = newValue => {
         this.mainContentDivWidth = newValue;
@@ -63,6 +67,12 @@ class timeLineState {
     }
     toggleMainContentModelFlag = () => {
         this.mainContentModelFlag = !this.mainContentModelFlag;
+    }
+    toogleMainListModelFlag = () => {
+        this.mainListModelFlag = !this.mainListModelFlag;
+    }
+    toogleLayoutMenuModelFlag = () => {
+        this.layoutMenuModelFlag = !this.layoutMenuModelFlag;
     }
 
     getAllProjectsMethod = () => {

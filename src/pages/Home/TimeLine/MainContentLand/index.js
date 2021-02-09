@@ -21,46 +21,6 @@ function Index(props) {
     // 计算卡片左上角的x坐标（相对于id为 maincontent的父级div）
     let itemInMainParam = {};
 
-    // const getLeftPos2 = (index, topPos, timeLineBeginYear, pxPerYear) => {
-
-    //     // let itemList = containerState.projectContents[projectId];
-
-    //     // 列表区右侧整个区域的高度，canvas只是其中的30%宽度
-    //     let { mainContentDivHeight } = props
-
-    //     let leftPos;
-
-    //     if (index % 2 === 0) {  // 偶数项，在下边
-    //         leftPos = 40;
-    //         if (index >= 2) {
-    //             if (topPos === itemInMainParam[index - 2].topPos) {
-    //                 leftPos = itemInMainParam[index - 2].leftPos - 15;
-
-    //             } else if (Math.abs(topPos - itemInMainParam[index - 2].topPos) < 90) {
-    //                 if (itemInMainParam[index - 2].leftPos === 40) {
-    //                     leftPos = 50;
-    //                 }
-    //             }
-
-    //         }
-    //     } else {  // 奇数项，在上边
-    //         // leftPos = canvasWidth/0.3*0.65;
-    //         leftPos = mainContentDivWidth * 0.65;
-    //         if (index >= 2) {
-    //             if (topPos === itemInMainParam[index - 2].topPos) {
-    //                 leftPos = itemInMainParam[index - 2].leftPos + 15;
-
-    //             } else if (Math.abs(topPos - itemInMainParam[index - 2].topPos) < 90) {
-    //                 if (itemInMainParam[index - 2].leftPos === leftPos) {
-    //                     leftPos = leftPos - 10;
-    //                 }
-    //             }
-
-    //         }
-    //     }
-    //     return leftPos;
-    // }
-
     const getLeftPos = (index, timeLineBeginYear, pxPerYear) => {
 
         // let { containerState } = this.props;
@@ -112,7 +72,6 @@ function Index(props) {
                 < div className="canvas-container-land" style={{ width: canvasWidth + 10 }}>
                     <MyCanvas {...canvasParam} canvasWidth={canvasWidth} canvasHeight={props.mainContentDivHeight * 0.3} />
                 </div >
-
             </div >
             :
             ''
