@@ -97,7 +97,7 @@ function Index(props) {
 
     return (
         canvasWidth ?
-            <div className="card-canvas-container">
+            <div className="card-canvas-container-land">
                 {
                     toJS(timeLineState.activedProjectItems).map((item, index) => {
                         let topPos = 0;
@@ -109,7 +109,7 @@ function Index(props) {
                     })
                 }
 
-                < div className="canvas-container" style={{ width: canvasWidth + 10 }}>
+                < div className="canvas-container-land" style={{ width: canvasWidth + 10 }}>
                     <MyCanvas {...canvasParam} canvasWidth={canvasWidth} canvasHeight={props.mainContentDivHeight * 0.3} />
                 </div >
 

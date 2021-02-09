@@ -25,10 +25,14 @@ class timeLineState {
     activedProjectItems = [];
     // 当前project id项目历史轴每像素表示几年
     pxPerYear = -1;
+    // 当前project id项目历史轴每像素表示几年(原始值，由后端决定，每个项目该值可能不同)
+    pxPerYearOrg = -1;
     // 当前project id 对应的其它数据
     activedProjectData = null;
     // 标识canvas内容发生了变化的变量（只观察该变量进行重新渲染，避免多个数据变化导致渲染多次）
     canvasChangeCount = -1;
+    // mainContent 的横屏、竖屏模式    true: 横屏、默认   false:竖屏
+    mainContentModelFlag = true;
 
     setMainContentDivWidth = newValue => {
         this.mainContentDivWidth = newValue;
@@ -48,11 +52,17 @@ class timeLineState {
     setPxPerYear = newValue => {
         this.pxPerYear = newValue;
     }
+    setPxPerYearOrg = newValue => {
+        this.pxPerYearOrg = newValue;
+    }
     setActivedProjectData = newValue => {
         this.activedProjectData = newValue;
     }
     addCanvasChangeCount = () => {
         this.canvasChangeCount++;
+    }
+    toggleMainContentModelFlag = () => {
+        this.mainContentModelFlag = !this.mainContentModelFlag;
     }
 
     getAllProjectsMethod = () => {
@@ -75,6 +85,7 @@ class timeLineState {
             if (res.status === 0) {
                 this.setActivedProjectItems(res.itemBeanList);
                 this.setPxPerYear(res.pxPerYear);
+                this.setPxPerYearOrg(res.pxPerYear);
                 const earlyYear = res.earlyYear;
                 const lastYear = res.lastYear;
                 const timeLineBeginYear = res.timeLineBeginYear;

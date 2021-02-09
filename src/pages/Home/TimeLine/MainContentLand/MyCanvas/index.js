@@ -128,7 +128,7 @@ function Index(props) {
                 } else {    //段时间
                     //矩形条柱上下偏移量
                     let marginUD = getMarginUD(i);
-                    console.log("marginUD:", marginUD);
+                    // console.log("marginUD:", marginUD);
                     if (marginUD === 0) {
                         ctx.fillStyle = "rgba(0,0,255,0.2)";
                         ctx.strokeStyle = "rgba(0,0,255,1)";

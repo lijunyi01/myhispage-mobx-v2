@@ -3,8 +3,8 @@ import { observer } from 'mobx-react';
 // import { Spin, Button } from 'antd';
 import timeLineState from './index.state'
 import MainList from './MainList';
-// import MainContent from './MainContent';
-import MainContent from './MainContentLand';
+import MainContent from './MainContent';
+import MainContentLand from './MainContentLand';
 import _ from 'lodash';
 import './index.less';
 
@@ -63,7 +63,11 @@ const Index = () => {
             </div>
             <div ref={maincontentdivref} id="maincontent">
                 {/* mobx6.0 ，timeLineState 被引入就会被观察，而不用显式注入组件，很方便 */}
-                <MainContent mainContentDivWidth={timeLineState.mainContentDivWidth} mainContentDivHeight={timeLineState.mainContentDivHeight} />
+                {timeLineState.mainContentModelFlag ?
+                    <MainContentLand mainContentDivWidth={timeLineState.mainContentDivWidth} mainContentDivHeight={timeLineState.mainContentDivHeight} />
+                    :
+                    <MainContent mainContentDivWidth={timeLineState.mainContentDivWidth} mainContentDivHeight={timeLineState.mainContentDivHeight} />
+                }
             </div>
         </div>
     )
