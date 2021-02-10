@@ -18,6 +18,10 @@
     height: 32px;
     background: rgba(255, 255, 255, 0.2);
     margin: 16px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-image: url('../assets/images/logo.png');
+    /* background-repeat: no-repeat; */
 }
 
 #sidelayout .site-layout .site-layout-background {

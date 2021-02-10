@@ -3,8 +3,11 @@ import { Layout, Menu } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
+    // UserOutlined,
+    HeatMapOutlined,
+    LogoutOutlined,
+    FieldTimeOutlined,
+    // VideoCameraOutlined,
     UploadOutlined,
 } from '@ant-design/icons';
 import './siderlayout.css';
@@ -12,6 +15,7 @@ import { Link, withRouter } from "react-router-dom";
 import { removeToken } from '@utils/auth';
 import MyHeader from '@pages/Home/MyHeader';
 import timeLineState from '@pages/Home/TimeLine/index.state';
+import Logo from '@assets/images/logo.png';
 
 const { Header, Sider, Content } = Layout;
 class SiderLayout extends React.Component {
@@ -49,21 +53,23 @@ class SiderLayout extends React.Component {
         return (
             <Layout id="sidelayout">
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-                    <div className="logo" />
+                    <div className="logo">
+                        {/* <img src={Logo} /> */}
+                    </div>
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={this.whichSelected()}>
                         {/* <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}> */}
-                        <Menu.Item key="1" icon={<UserOutlined />}>
+                        <Menu.Item key="1" icon={<FieldTimeOutlined />}>
                             <Link to="/myhis/timeline" />
                             TimeLine
                         </Menu.Item>
-                        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+                        <Menu.Item key="2" icon={<HeatMapOutlined />}>
                             <Link to="/myhis/map" />
                             Map
                         </Menu.Item>
                         <Menu.Item key="3" icon={<UploadOutlined />}>
                             nav 3
                         </Menu.Item>
-                        <Menu.Item key="4" icon={<UploadOutlined />} className="last-menu" onClick={this.handleLogout}>
+                        <Menu.Item key="4" icon={<LogoutOutlined />} className="last-menu" onClick={this.handleLogout}>
                             Logout
                         </Menu.Item>
                     </Menu>

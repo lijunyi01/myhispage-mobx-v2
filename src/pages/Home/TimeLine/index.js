@@ -53,7 +53,7 @@ const Index = () => {
             if (divdom) {
                 timeLineState.setMainContentDivWidth(divdom.offsetWidth);
                 // console.log("divdom", divdom);
-                console.log("divdomWidth:", divdom.offsetWidth);
+                // console.log("divdomWidth:", divdom.offsetWidth);
             }
         }, 600);
 

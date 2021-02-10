@@ -18,7 +18,7 @@ function Index(props) {
     let { lastYear, earlyYear, pxPerYear, yearInterval, timeLineBeginYear } = canvasParam;
     let canvasHeight = (lastYear - earlyYear) * pxPerYear < 50 ? 300 : (lastYear - timeLineBeginYear + yearInterval) * pxPerYear + 50;
     // console.log("canvasParam:", canvasParam);
-    console.log("canvasHeight:", canvasHeight);
+    // console.log("canvasHeight:", canvasHeight);
 
     // 计算卡片左上角的x坐标（相对于id为 maincontent的父级div）
     let itemInMainParam = {};

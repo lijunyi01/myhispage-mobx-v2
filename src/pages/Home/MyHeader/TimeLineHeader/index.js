@@ -23,7 +23,7 @@ function Index() {
 
     // 新增历史项目
     const handleNewClick = () => { }
-    console.log("defaultValue:", timeLineState.pxPerYearOrg);
+    // console.log("defaultValue:", timeLineState.pxPerYearOrg);
 
     return (
         <Space>
