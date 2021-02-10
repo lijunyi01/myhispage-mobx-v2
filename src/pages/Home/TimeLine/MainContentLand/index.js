@@ -4,7 +4,7 @@ import { toJS } from 'mobx';
 import timeLineState from '../index.state';
 import MyCanvas from './MyCanvas';
 import './index.less';
-import ProjItemCard from './ProjItemCard';
+import ProjItemCard from '../ProjItemCard';
 
 function Index(props) {
     // console.log(props);
@@ -41,16 +41,40 @@ function Index(props) {
     }
 
     // 计算卡片左上角的y坐标（相对于id为 maincontent的父级div）
-    const getTopPos = (index, leftPos, timeLineBeginYear, pxPerYear) => {
+    const getTopPos = (index, leftPos) => {
 
         const centerY = props.mainContentDivHeight / 2;
         const canvasContainerHeight = props.mainContentDivHeight * 0.3;
 
-        let topPos = 150;
+        let topPos;
         if (index % 2 === 0) {  // 偶数项，在下边
             topPos = centerY + canvasContainerHeight / 2 - 2;
+            // 以下是进行错位处理
+            if (index >= 2) {
+                if (leftPos === itemInMainParam[index - 2].leftPos) {
+                    topPos = itemInMainParam[index - 2].topPos + 15;
+
+                } else if (Math.abs(leftPos - itemInMainParam[index - 2].leftPos) < 150) {
+                    if (itemInMainParam[index - 2].topPos === topPos) {
+                        topPos = topPos - 10;
+                    }
+                }
+
+            }
         } else {             // 奇数项，在上边
             topPos = centerY - canvasContainerHeight / 2 - 80;
+            // 以下是进行错位处理
+            if (index >= 2) {
+                if (leftPos === itemInMainParam[index - 2].leftPos) {
+                    topPos = itemInMainParam[index - 2].topPos - 15;
+
+                } else if (Math.abs(leftPos - itemInMainParam[index - 2].leftPos) < 150) {
+                    if (itemInMainParam[index - 2].topPos === topPos) {
+                        topPos = topPos + 10;
+                    }
+                }
+
+            }
         }
         return topPos;
     }

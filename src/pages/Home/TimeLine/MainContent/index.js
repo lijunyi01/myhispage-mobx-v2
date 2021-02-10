@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import timeLineState from '../index.state';
 import MyCanvas from './MyCanvas';
-import ProjItemCard from './ProjItemCard';
+import ProjItemCard from '../ProjItemCard';
 import './index.less';
 
 function Index(props) {
@@ -22,7 +22,7 @@ function Index(props) {
 
     // 计算卡片左上角的x坐标（相对于id为 maincontent的父级div）
     let itemInMainParam = {};
-    const getLeftPos = (index, topPos, timeLineBeginYear, pxPerYear) => {
+    const getLeftPos = (index, topPos) => {
 
         // 列表区右侧整个区域的宽度，canvas只是其中的30%宽度
         let { mainContentDivWidth } = props
@@ -40,21 +40,24 @@ function Index(props) {
                 if (topPos === itemInMainParam[index - 2].topPos) {
                     leftPos = itemInMainParam[index - 2].leftPos - 15;
 
-                } else if (Math.abs(topPos - itemInMainParam[index - 2].topPos) < 90) {
+                } else if (Math.abs(topPos - itemInMainParam[index - 2].topPos) < 80) {
                     if (itemInMainParam[index - 2].leftPos === 40) {
                         leftPos = 50;
+                    }
+                    if (itemInMainParam[index - 2].leftPos === leftPos) {
+                        leftPos = leftPos + 10;
                     }
                 }
 
             }
-        } else {   // 偶数项，在右边
+        } else {   // 奇数项，在右边
             leftPos = leftPos = centerX + canvasContainerWidth / 2 - 1;
             // 以下是进行错位处理
             if (index >= 2) {
                 if (topPos === itemInMainParam[index - 2].topPos) {
                     leftPos = itemInMainParam[index - 2].leftPos + 15;
 
-                } else if (Math.abs(topPos - itemInMainParam[index - 2].topPos) < 90) {
+                } else if (Math.abs(topPos - itemInMainParam[index - 2].topPos) < 80) {
                     if (itemInMainParam[index - 2].leftPos === leftPos) {
                         leftPos = leftPos - 10;
                     }
