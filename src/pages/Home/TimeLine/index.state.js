@@ -4,6 +4,8 @@ import server from './index.server';
 const {
     getAllProjects,  // 获取项目列表
     getProjectItems,  // 获取某一项目的详细信息
+    createProject,    // 创建项目
+    deleteProject,    // 删除项目
 } = server;
 
 class timeLineState {
@@ -75,13 +77,12 @@ class timeLineState {
         this.layoutMenuModelFlag = !this.layoutMenuModelFlag;
     }
 
-    getAllProjectsMethod = () => {
+    getAllProjectsMethod = (firstAsActive = false) => {
         getAllProjects().then(res => {
-            //处理接口拿到的结果
-            // console.log("res:", res);
             if (res.status === 0 && res.projectList.length > 0) {
                 this.setProjectList(res.projectList);
-                if (this.activedProjectId === -1) {
+                // 如果firstAsActive 传了值且传为true，则将第一项设为active
+                if (this.activedProjectId === -1 || firstAsActive) {
                     this.setActivedProjectId(res.projectList[0].id);
                 }
             }
@@ -103,6 +104,25 @@ class timeLineState {
                 this.setActivedProjectData({ earlyYear, lastYear, timeLineBeginYear, yearInterval });
                 // 设置canvas重绘标志
                 this.addCanvasChangeCount();
+            }
+        })
+    }
+
+    createProjectMethod = (data, callback) => {
+        createProject(data).then(res => {
+            if (res.status === 0) {
+                // console.log("add project successly");
+                this.getAllProjectsMethod(true);
+                callback();
+            }
+        })
+    }
+
+    deleteProjectMethod = projectId => {
+        deleteProject(projectId).then(res => {
+            if (res.status === 0) {
+                // console.log("add project successly");
+                this.getAllProjectsMethod(true);
             }
         })
     }
