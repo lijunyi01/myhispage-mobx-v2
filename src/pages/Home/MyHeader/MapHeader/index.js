@@ -51,10 +51,7 @@ function Index() {
                 {/* <span>zoomLevel:</span>
                 <span>{zoomLevel}</span> */}
                 <div style={{ width: "80px" }} />
-                {/* <Radio.Group onChange={onMapTypeChange} defaultValue={2}>
-                <Radio value={1}>普通模式</Radio>
-                <Radio value={2}>地球模式</Radio>
-                </Radio.Group> */}
+
                 <Switch defaultChecked={false} onChange={onSwitchChange} checkedChildren="地图模式控件开" unCheckedChildren="地图模式控件关" />
                 <Switch defaultChecked={false} onChange={onSwitchChange2} checkedChildren="地图旋转控件开" unCheckedChildren="地图旋转控件关" />
                 <SelectLocationDrawer showFlag={mapState.showLocationSelectDwawerFlag} onClose={onLocationSelectDrawerClose} />

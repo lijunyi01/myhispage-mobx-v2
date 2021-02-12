@@ -39,6 +39,19 @@ class timeLineState {
     mainListModelFlag = true;
     // layout左边主菜单模式   true: 伸展、默认   false：收缩
     layoutMenuModelFlag = true;
+    // 年号列表
+    nianhaoList = [
+        { 'key': '1', 'value': '鲁隐公' },
+        { 'key': '2', 'value': '鲁定公' },
+        { 'key': '3', 'value': '鲁哀公' },
+        { 'key': '4', 'value': '齐桓公' },
+        { 'key': '5', 'value': '周共和' },
+        { 'key': '6', 'value': '明万历' },
+        { 'key': '7', 'value': '明洪武' },
+        { 'key': '8', 'value': '清康熙' },
+        { 'key': '9', 'value': '清乾隆' },
+
+    ];
 
     setMainContentDivWidth = newValue => {
         this.mainContentDivWidth = newValue;
