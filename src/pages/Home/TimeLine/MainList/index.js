@@ -88,7 +88,7 @@ function Index() {
                 showFlag={showAddProjItemModal}
                 onClose={() => setShowAddProjItemModal(false)}
                 nianhaoList={timeLineState.nianhaoList}
-                onSubmit={param => { timeLineState.createProjectMethod(param, () => { setShowAddProjItemModal(false) }); }}
+                onSubmit={param => { timeLineState.createProjectItemMethod({ ...param, projectId: timeLineState.activedProjectId }, () => { setShowAddProjItemModal(false) }); }}
             />
         </>
     )

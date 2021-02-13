@@ -6,6 +6,7 @@ const {
     getProjectItems,  // 获取某一项目的详细信息
     createProject,    // 创建项目
     deleteProject,    // 删除项目
+    createProjectItem,    // 创建新项目的一个事件
 } = server;
 
 class timeLineState {
@@ -136,6 +137,16 @@ class timeLineState {
             if (res.status === 0) {
                 // console.log("add project successly");
                 this.getAllProjectsMethod(true);
+            }
+        })
+    }
+
+    createProjectItemMethod = (data, callback) => {
+        console.log("createProjectItem param:", data);
+        createProjectItem(data).then(res => {
+            if (res.status === 0) {
+                this.getProjectItemsMethod(data.projectId);
+                callback();
             }
         })
     }

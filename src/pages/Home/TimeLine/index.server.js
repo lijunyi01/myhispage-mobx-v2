@@ -4,7 +4,7 @@ const getAllProjectsUrl = '/appinterface/getAllProjects';
 const getProjectItemsUrl = '/appinterface/getProjectItems';
 const createProjectUrl = '/appinterface/createProject';
 const deleteProjectUrl = '/appinterface/deleteProject';
-
+const createProjectItemUrl = '/appinterface/createProjectItem';
 
 class Services {
 
@@ -41,6 +41,15 @@ class Services {
             url: deleteProjectUrl,
             method: 'post',
             data: { 'projectId': projectId }
+        })
+    }
+
+    // 创建新项目的一个事件
+    createProjectItem = data => {
+        return request({
+            url: createProjectItemUrl,
+            method: 'post',
+            data
         })
     }
 
