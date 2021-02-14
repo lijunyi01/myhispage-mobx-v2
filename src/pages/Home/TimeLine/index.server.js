@@ -5,6 +5,7 @@ const getProjectItemsUrl = '/appinterface/getProjectItems';
 const createProjectUrl = '/appinterface/createProject';
 const deleteProjectUrl = '/appinterface/deleteProject';
 const createProjectItemUrl = '/appinterface/createProjectItem';
+const deleteProjectItemUrl = '/appinterface/deleteProjectItem';
 
 class Services {
 
@@ -50,6 +51,15 @@ class Services {
             url: createProjectItemUrl,
             method: 'post',
             data
+        })
+    }
+
+    // 删除项目的一个事件
+    deleteProjectItem = (projectId, itemId) => {
+        return request({
+            url: deleteProjectItemUrl,
+            method: 'post',
+            data: { 'projectId': projectId, 'itemId': itemId }
         })
     }
 

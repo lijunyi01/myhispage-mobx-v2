@@ -16,7 +16,8 @@ function Index(props) {
     };
 
     let { lastYear, earlyYear, pxPerYear, yearInterval, timeLineBeginYear } = canvasParam;
-    let canvasHeight = (lastYear - earlyYear) * pxPerYear < 50 ? 300 : (lastYear - timeLineBeginYear + yearInterval) * pxPerYear + 50;
+    // let canvasHeight = (lastYear - earlyYear) * pxPerYear < 50 ? 300 : (lastYear - timeLineBeginYear + yearInterval) * pxPerYear + 50;
+    let canvasHeight = (lastYear - timeLineBeginYear + yearInterval) * pxPerYear + 50;
     // console.log("canvasParam:", canvasParam);
     // console.log("canvasHeight:", canvasHeight);
 

@@ -7,6 +7,7 @@ const {
     createProject,    // 创建项目
     deleteProject,    // 删除项目
     createProjectItem,    // 创建新项目的一个事件
+    deleteProjectItem,    // 删除项目的一个事件
 } = server;
 
 class timeLineState {
@@ -146,7 +147,19 @@ class timeLineState {
         createProjectItem(data).then(res => {
             if (res.status === 0) {
                 this.getProjectItemsMethod(data.projectId);
+                // 设置canvas重绘标志
+                this.addCanvasChangeCount();
                 callback();
+            }
+        })
+    }
+
+    deleteProjectItemMethod = (itemId) => {
+        deleteProjectItem(this.activedProjectId, itemId).then(res => {
+            if (res.status === 0) {
+                this.getProjectItemsMethod(this.activedProjectId);
+                // 设置canvas重绘标志
+                this.addCanvasChangeCount();
             }
         })
     }

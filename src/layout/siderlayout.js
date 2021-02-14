@@ -15,7 +15,7 @@ import { Link, withRouter } from "react-router-dom";
 import { removeToken } from '@utils/auth';
 import MyHeader from '@pages/Home/MyHeader';
 import timeLineState from '@pages/Home/TimeLine/index.state';
-import Logo from '@assets/images/logo.png';
+// import Logo from '@assets/images/logo.png';
 
 const { Header, Sider, Content } = Layout;
 class SiderLayout extends React.Component {

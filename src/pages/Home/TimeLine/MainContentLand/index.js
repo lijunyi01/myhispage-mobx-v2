@@ -16,7 +16,12 @@ function Index(props) {
     };
 
     let { lastYear, earlyYear, pxPerYear, yearInterval, timeLineBeginYear } = canvasParam;
-    let canvasWidth = (lastYear - earlyYear) * pxPerYear < 50 ? 300 : (lastYear - timeLineBeginYear + yearInterval) * pxPerYear + 50;
+
+    // console.log("lastYear:", lastYear);
+    // console.log("earlyYear:", earlyYear);
+    // console.log("timeLineBeginYear:", timeLineBeginYear);
+    // let canvasWidth = (lastYear - earlyYear) * pxPerYear < 50 ? 300 : (lastYear - timeLineBeginYear + yearInterval) * pxPerYear + 50;
+    let canvasWidth = (lastYear - timeLineBeginYear + yearInterval) * pxPerYear + 50;
 
     // 计算卡片左上角的x坐标（相对于id为 maincontent的父级div）
     let itemInMainParam = {};

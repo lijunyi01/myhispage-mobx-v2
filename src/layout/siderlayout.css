@@ -21,7 +21,8 @@
     margin-left: 20px;
     margin-right: 20px;
     background-image: url('../assets/images/logo.png');
-    /* background-repeat: no-repeat; */
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #sidelayout .site-layout .site-layout-background {

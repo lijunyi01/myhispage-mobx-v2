@@ -1,8 +1,9 @@
 import React from 'react';
 import './index.less';
-import { Tooltip, Space } from 'antd'
-import { EditOutlined, DeleteOutlined, LikeOutlined } from '@ant-design/icons';
+import { Tooltip, Space, Modal } from 'antd'
+import { EditOutlined, DeleteOutlined, LikeOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import ItemTip from './ItemTip';
+import timeLineState from '../index.state';
 
 const IconText = ({ icon, text, handler }) => (
     <Space>
@@ -16,7 +17,23 @@ const IconText = ({ icon, text, handler }) => (
 function Index(props) {
     let { cardParam, leftPos, topPos } = props;
 
-    const handleClick = () => { };
+    const handleClick = () => {
+        Modal.confirm({
+            title: '确认删除该item吗?',
+            icon: <ExclamationCircleOutlined />,
+            content: '',
+            okText: '是',
+            okType: 'danger',
+            cancelText: '否',
+            onOk: () => {
+                timeLineState.deleteProjectItemMethod(cardParam.itemId);
+            }
+            ,
+            onCancel() {
+                // console.log('Cancel');
+            },
+        });
+    };
     return (
         <div className="projItemCard" style={{ top: topPos, left: leftPos }}>
             <div className="itemNameArea">
