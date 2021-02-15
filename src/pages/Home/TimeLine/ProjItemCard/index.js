@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.less';
 import { Tooltip, Space, Modal } from 'antd'
 import { EditOutlined, DeleteOutlined, LikeOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import ItemTip from './ItemTip';
 import timeLineState from '../index.state';
+import EditTipModal from './EditTipModal';
 
 const IconText = ({ icon, text, handler }) => (
     <Space>
@@ -15,9 +16,16 @@ const IconText = ({ icon, text, handler }) => (
 );
 
 function Index(props) {
+
+    const [showEditTipModalFlag, setShowEditTipModalFlag] = useState(false);
+
     let { cardParam, leftPos, topPos } = props;
 
-    const handleClick = () => {
+    const handleClick = () => { };
+
+    const handleEditClick = () => { setShowEditTipModalFlag(true) };
+
+    const handleDeleteClick = () => {
         Modal.confirm({
             title: '确认删除该item吗?',
             icon: <ExclamationCircleOutlined />,
@@ -72,49 +80,27 @@ function Index(props) {
 
             <div className="itemButtons">
                 <Tooltip placement="bottom" title="Edit">
-                    <div className="button1" onClick={
-                        (event) => {
-                            event.stopPropagation();
-                            // let confirmModalContent = '您确认删除事件:"'+ componentState.itemName + '" 吗?';
-                            // let confirmModalTitle = '删除事件确认';
-                            // actions.showConfirm({delType:'DELITEM',title:confirmModalTitle,content:confirmModalContent,delId:componentState.itemId})
-                        }
-                    }>
-                        {/* <IconText icon={LikeOutlined} text="like" key="like-" handler={this.handleClick}/> */}
-                        <IconText icon={EditOutlined} text="" key="edit-" handler={handleClick} />
+                    <div className="button" >
+                        <IconText icon={EditOutlined} text="" key="edit-" handler={handleEditClick} />
                     </div>
                 </Tooltip>
                 <Tooltip placement="bottom" title="Delete">
-                    <div className="button2" onClick={
-                        (event) => {
-                            event.stopPropagation();
-                            // actions.modifyItemButtonClick({itemId:componentState.itemId,itemName:componentState.itemName,itemIndex:index})
-                        }
-                    }>
-                        <IconText icon={DeleteOutlined} text="" key="delete-" handler={handleClick} />
+                    <div className="button" >
+                        <IconText icon={DeleteOutlined} text="" key="delete-" handler={handleDeleteClick} />
                     </div>
                 </Tooltip>
                 <Tooltip placement="bottom" title="prompt text3">
-                    <div className="button3" onClick={
-                        (event) => {
-                            event.stopPropagation();
-                            // actions.modifyTipsButtonClick({itemId:componentState.itemId,itemName:componentState.itemName,itemIndex:index})
-                        }
-                    }>
+                    <div className="button" >
                         <IconText icon={LikeOutlined} text="" key="like-" handler={handleClick} />
                     </div>
                 </Tooltip>
                 <Tooltip placement="bottom" title="prompt text4">
-                    <div className="button4" onClick={
-                        (event) => {
-                            event.stopPropagation();
-                            // actions.showConfirm({title:confirmModalTitle,content:confirmModalContent,id:componentState.id})
-                        }
-                    }>
+                    <div className="button" >
                         <IconText icon={LikeOutlined} text="" key="like-" handler={handleClick} />
                     </div>
                 </Tooltip>
             </div>
+            <EditTipModal showFlag={showEditTipModalFlag} onClose={() => { setShowEditTipModalFlag(false) }} projectId={timeLineState.activedProjectId} itemId={cardParam.itemId} />
         </div>
     )
 }
