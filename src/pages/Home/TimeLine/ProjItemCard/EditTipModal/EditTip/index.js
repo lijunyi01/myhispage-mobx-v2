@@ -1,7 +1,9 @@
 import React from 'react';
 import { toJS } from 'mobx';
 import timeLineState from '@pages/Home/TimeLine/index.state';
-import { Table, Button, Form, Input, Divider } from 'antd';
+import { Table, Button, Form, Input, Divider, Modal, message } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import _ from 'lodash';
 
 function index(props) {
 
@@ -22,8 +24,26 @@ function index(props) {
 
     }
 
+    const handleDeleteTip = tipId => {
+        Modal.confirm({
+            title: '确认删除吗?',
+            icon: <ExclamationCircleOutlined />,
+            content: '',
+            okText: '是',
+            okType: 'danger',
+            cancelText: '否',
+            onOk: () => {
+                timeLineState.deleteTipMethod(props.projectId, props.itemId, tipId);
+            }
+            ,
+            onCancel() {
+                // console.log('Cancel');
+            },
+        });
+    };
+
     const itemTips = getItemTips();
-    console.log("tips:", itemTips);
+    // console.log("tips:", itemTips);
 
     const columns = [
         {
@@ -36,7 +56,7 @@ function index(props) {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
-                <Button type="primary" onClick={() => { console.log("record:", record); }}>Delete</Button>
+                <Button type="primary" onClick={() => { handleDeleteTip(record.id); }}>Delete</Button>
             ),
         },
     ];
@@ -63,7 +83,28 @@ function index(props) {
         wrapperCol: { offset: 6, span: 16 },
     };
 
-    const onFinish = values => { }
+    const onFinish = values => {
+        if (_.trim(values.tipContent) !== "") {
+            Modal.confirm({
+                title: '确认新增吗?',
+                icon: <ExclamationCircleOutlined />,
+                content: '',
+                okText: '是',
+                okType: 'danger',
+                cancelText: '否',
+                onOk: () => {
+                    timeLineState.addTipMethod(props.projectId, props.itemId, values.tipContent);
+                }
+                ,
+                onCancel() {
+                    // console.log('Cancel');
+                },
+            });
+        } else {
+            message.warn("content 不能为空字符串！");
+        }
+
+    }
 
     return (
         <div>
@@ -71,7 +112,7 @@ function index(props) {
             <Divider />
             <Form
                 name="new project"
-                initialValues={{}}
+                initialValues={{ "tipContent": "" }}
                 {...formItemLayout}
                 onFinish={onFinish}
             >
@@ -82,13 +123,6 @@ function index(props) {
                 >
                     <Input />
                 </Form.Item>
-                {/* <Form.Item
-                    name="projectDes"
-                    label="project des:"
-                    rules={[{ required: true, message: 'Please input project des!' }]}
-                >
-                    <Input />
-                </Form.Item> */}
                 <Form.Item {...formItemTailLayout}>
                     <Button type="primary" htmlType="submit" style={{ 'width': '50%', 'float': 'right' }}>
                         新增Tip

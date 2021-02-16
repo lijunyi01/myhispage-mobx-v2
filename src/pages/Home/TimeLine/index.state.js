@@ -8,6 +8,8 @@ const {
     deleteProject,    // 删除项目
     createProjectItem,    // 创建新项目的一个事件
     deleteProjectItem,    // 删除项目的一个事件
+    addTip,            // 新增Tip
+    deleteTip,          // 删除Tip
 } = server;
 
 class timeLineState {
@@ -160,6 +162,22 @@ class timeLineState {
                 this.getProjectItemsMethod(this.activedProjectId);
                 // 设置canvas重绘标志
                 this.addCanvasChangeCount();
+            }
+        })
+    }
+
+    addTipMethod = (projectId, itemId, tipId) => {
+        addTip(projectId, itemId, tipId).then(res => {
+            if (res.status === 0) {
+                this.getProjectItemsMethod(projectId);
+            }
+        })
+    }
+
+    deleteTipMethod = (projectId, itemId, tipId) => {
+        deleteTip(projectId, itemId, tipId).then(res => {
+            if (res.status === 0) {
+                this.getProjectItemsMethod(projectId);
             }
         })
     }

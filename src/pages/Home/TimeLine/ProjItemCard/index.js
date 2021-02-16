@@ -79,24 +79,24 @@ function Index(props) {
 
 
             <div className="itemButtons">
-                <Tooltip placement="bottom" title="Edit">
+                <Tooltip placement="bottom" title="Edit-Tips">
                     <div className="button" >
                         <IconText icon={EditOutlined} text="" key="edit-" handler={handleEditClick} />
+                    </div>
+                </Tooltip>
+                <Tooltip placement="bottom" title="">
+                    <div className="button" >
+                        <IconText icon={LikeOutlined} text="" key="like-" handler={handleClick} />
+                    </div>
+                </Tooltip>
+                <Tooltip placement="bottom" title="">
+                    <div className="button" >
+                        <IconText icon={LikeOutlined} text="" key="like2-" handler={handleClick} />
                     </div>
                 </Tooltip>
                 <Tooltip placement="bottom" title="Delete">
                     <div className="button" >
                         <IconText icon={DeleteOutlined} text="" key="delete-" handler={handleDeleteClick} />
-                    </div>
-                </Tooltip>
-                <Tooltip placement="bottom" title="prompt text3">
-                    <div className="button" >
-                        <IconText icon={LikeOutlined} text="" key="like-" handler={handleClick} />
-                    </div>
-                </Tooltip>
-                <Tooltip placement="bottom" title="prompt text4">
-                    <div className="button" >
-                        <IconText icon={LikeOutlined} text="" key="like-" handler={handleClick} />
                     </div>
                 </Tooltip>
             </div>

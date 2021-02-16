@@ -6,6 +6,8 @@ const createProjectUrl = '/appinterface/createProject';
 const deleteProjectUrl = '/appinterface/deleteProject';
 const createProjectItemUrl = '/appinterface/createProjectItem';
 const deleteProjectItemUrl = '/appinterface/deleteProjectItem';
+const addTipUrl = '/appinterface/addTip';
+const deleteTipUrl = '/appinterface/deleteTip';
 
 class Services {
 
@@ -60,6 +62,24 @@ class Services {
             url: deleteProjectItemUrl,
             method: 'post',
             data: { 'projectId': projectId, 'itemId': itemId }
+        })
+    }
+
+    // 新增Tip
+    addTip = (projectId, itemId, tipContent) => {
+        return request({
+            url: addTipUrl,
+            method: 'post',
+            data: { 'projectId': projectId, 'itemId': itemId, 'tipContent': tipContent }
+        })
+    }
+
+    // 删除Tip
+    deleteTip = (projectId, itemId, tipId) => {
+        return request({
+            url: deleteTipUrl,
+            method: 'post',
+            data: { 'projectId': projectId, 'itemId': itemId, 'tipId': tipId }
         })
     }
 
