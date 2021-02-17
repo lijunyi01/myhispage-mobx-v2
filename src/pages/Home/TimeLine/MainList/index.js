@@ -25,6 +25,7 @@ function Index() {
 
     useEffect(() => {
         timeLineState.getAllProjectsMethod();
+        timeLineState.getRulersMethod();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {

@@ -8,6 +8,7 @@ const createProjectItemUrl = '/appinterface/createProjectItem';
 const deleteProjectItemUrl = '/appinterface/deleteProjectItem';
 const addTipUrl = '/appinterface/addTip';
 const deleteTipUrl = '/appinterface/deleteTip';
+const getRulersUrl = '/appinterface/getRulers';
 
 class Services {
 
@@ -80,6 +81,15 @@ class Services {
             url: deleteTipUrl,
             method: 'post',
             data: { 'projectId': projectId, 'itemId': itemId, 'tipId': tipId }
+        })
+    }
+
+    // 获取标尺数据
+    getRulers = () => {
+        return request({
+            url: getRulersUrl,
+            method: 'post',
+            data: {}
         })
     }
 

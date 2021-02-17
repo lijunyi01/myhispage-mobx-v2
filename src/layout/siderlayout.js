@@ -8,7 +8,7 @@ import {
     LogoutOutlined,
     FieldTimeOutlined,
     // VideoCameraOutlined,
-    UploadOutlined,
+    // UploadOutlined,
 } from '@ant-design/icons';
 import './siderlayout.css';
 import { Link, withRouter } from "react-router-dom";

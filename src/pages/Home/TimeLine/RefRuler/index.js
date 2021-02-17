@@ -3,19 +3,19 @@ import './index.less';
 
 const RulerItem = ({ index, mode, stage, beginYear, lastYear, pxPerYear, rulerSYear, rulerEYear }) => {
     console.log("lastYear:", lastYear);
-    if (stage.eYear > beginYear && stage.sYear < lastYear) {
+    if (stage.endyear > beginYear && stage.startyear < lastYear) {
         let length = 0;
-        if (stage.sYear < beginYear) {
-            length = (stage.eYear - beginYear) * pxPerYear;
+        if (stage.startyear < beginYear) {
+            length = (stage.endyear - beginYear) * pxPerYear;
         } else {
-            length = (stage.eYear - stage.sYear) * pxPerYear;
+            length = (stage.endyear - stage.startyear) * pxPerYear;
         }
 
         if (index === 0 && rulerSYear > beginYear) {
             const margin = (rulerSYear - beginYear) * pxPerYear;
-            return <div className="ruleritem" style={mode === 0 ? { 'width': length, 'marginLeft': margin } : { 'height': length, 'marginTop': margin }}> {stage.name}</div>
+            return <div className="ruleritem" style={mode === 0 ? { 'width': length, 'marginLeft': margin } : { 'height': length, 'marginTop': margin }}> {stage.itemname}</div>
         } else {
-            return <div className="ruleritem" style={mode === 0 ? { 'width': length } : { 'height': length }}> {stage.name}</div>
+            return <div className="ruleritem" style={mode === 0 ? { 'width': length } : { 'height': length }}> {stage.itemname}</div>
         }
 
     } else {

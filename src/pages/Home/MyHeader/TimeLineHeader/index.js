@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Space, Slider, Switch } from 'antd';
+import { Button, Space, Slider, Switch, Select } from 'antd';
 import { observer } from 'mobx-react';
 import timeLineState from '@pages/Home/TimeLine/index.state';
 import AddProjectModal from './AddProjectModal';
+import { toJS } from 'mobx';
 // import _ from 'lodash';
+
+const { Option } = Select;
 
 function Index() {
 
@@ -25,9 +28,35 @@ function Index() {
         timeLineState.toggleMainContentModelFlag();
     }
 
+    // 历史标尺多选框改变内容
+    const handleSelectChange = values => {
+        console.log("selected:", values);
+        timeLineState.generateSelectedRulers(values);
+
+    };
+    // 历史标尺多选框可选项
+    const children = [];
+    toJS(timeLineState.rulers).forEach(element => {
+        children.push(<Option key={element.id}>{element.rulerName}</Option>);
+    });
+    // for (let i = 10; i < 36; i++) {
+    //     children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+    // }
+
     return (
         <Space>
             <Button type="primary" onClick={() => setShowAddProjModal(true)}>new project</Button>
+            <div style={{ width: "40px" }} />
+            <Select
+                mode="multiple"
+                allowClear
+                style={{ width: '250px' }}
+                placeholder="请选择历史标尺"
+                defaultValue={[]}
+                onChange={handleSelectChange}
+            >
+                {children}
+            </Select>
             <div style={{ width: "40px" }} />
             <div>像素/年:</div>
             <div style={{ width: "100px" }}>

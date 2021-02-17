@@ -10,6 +10,7 @@ const {
     deleteProjectItem,    // 删除项目的一个事件
     addTip,            // 新增Tip
     deleteTip,          // 删除Tip
+    getRulers,         // 获取标尺数据
 } = server;
 
 class timeLineState {
@@ -57,24 +58,9 @@ class timeLineState {
 
     ];
     // 标尺数据
-    rulers = [
-        {
-            'id': 1, 'rulerSYear': -202, 'rulerEYear': 907, 'stages': [
-                { 'name': '西汉', 'sYear': -202, 'eYear': 25 },
-                { 'name': '东汉', 'sYear': 25, 'eYear': 220 },
-                { 'name': '魏', 'sYear': 220, 'eYear': 265 },
-                { 'name': '西晋', 'sYear': 266, 'eYear': 316 },
-                { 'name': '东晋', 'sYear': 317, 'eYear': 420 },
-                { 'name': '宋', 'sYear': 420, 'eYear': 479 },
-                { 'name': '齐', 'sYear': 479, 'eYear': 502 },
-                { 'name': '梁', 'sYear': 502, 'eYear': 557 },
-                { 'name': '陈', 'sYear': 557, 'eYear': 589 },
-                { 'name': '隋', 'sYear': 589, 'eYear': 618 },
-                { 'name': '唐', 'sYear': 618, 'eYear': 907 },
-            ]
-        }
-
-    ]
+    rulers = [];
+    // 选中的标尺数据
+    selectedRulers = [];
 
     setMainContentDivWidth = newValue => {
         this.mainContentDivWidth = newValue;
@@ -111,6 +97,18 @@ class timeLineState {
     }
     toogleLayoutMenuModelFlag = () => {
         this.layoutMenuModelFlag = !this.layoutMenuModelFlag;
+    }
+    setRulers = newValue => {
+        this.rulers = newValue;
+    }
+    generateSelectedRulers = selectedKeys => {
+        if (selectedKeys.length > 0) {
+            this.selectedRulers = this.rulers.filter(item => {
+                return selectedKeys.includes(item.id + "");
+            })
+        } else {
+            this.selectedRulers = [];
+        }
     }
 
     getAllProjectsMethod = (firstAsActive = false) => {
@@ -197,6 +195,14 @@ class timeLineState {
         deleteTip(projectId, itemId, tipId).then(res => {
             if (res.status === 0) {
                 this.getProjectItemsMethod(projectId);
+            }
+        })
+    }
+
+    getRulersMethod = () => {
+        getRulers().then(res => {
+            if (res.status === 0) {
+                this.setRulers(res.rulers);
             }
         })
     }
