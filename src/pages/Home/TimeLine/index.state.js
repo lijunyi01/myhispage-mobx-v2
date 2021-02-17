@@ -56,6 +56,25 @@ class timeLineState {
         { 'key': '9', 'value': '清乾隆' },
 
     ];
+    // 标尺数据
+    rulers = [
+        {
+            'id': 1, 'rulerSYear': -202, 'rulerEYear': 907, 'stages': [
+                { 'name': '西汉', 'sYear': -202, 'eYear': 25 },
+                { 'name': '东汉', 'sYear': 25, 'eYear': 220 },
+                { 'name': '魏', 'sYear': 220, 'eYear': 265 },
+                { 'name': '西晋', 'sYear': 266, 'eYear': 316 },
+                { 'name': '东晋', 'sYear': 317, 'eYear': 420 },
+                { 'name': '宋', 'sYear': 420, 'eYear': 479 },
+                { 'name': '齐', 'sYear': 479, 'eYear': 502 },
+                { 'name': '梁', 'sYear': 502, 'eYear': 557 },
+                { 'name': '陈', 'sYear': 557, 'eYear': 589 },
+                { 'name': '隋', 'sYear': 589, 'eYear': 618 },
+                { 'name': '唐', 'sYear': 618, 'eYear': 907 },
+            ]
+        }
+
+    ]
 
     setMainContentDivWidth = newValue => {
         this.mainContentDivWidth = newValue;

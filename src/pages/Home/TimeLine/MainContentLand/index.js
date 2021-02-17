@@ -5,6 +5,7 @@ import timeLineState from '../index.state';
 import MyCanvas from './MyCanvas';
 import './index.less';
 import ProjItemCard from '../ProjItemCard';
+import RefRuler from '../RefRuler';
 
 function Index(props) {
     // console.log(props);
@@ -15,7 +16,7 @@ function Index(props) {
         'canvasChangeCount': timeLineState.canvasChangeCount
     };
 
-    let { lastYear, earlyYear, pxPerYear, yearInterval, timeLineBeginYear } = canvasParam;
+    let { lastYear, pxPerYear, yearInterval, timeLineBeginYear } = canvasParam;
 
     // console.log("lastYear:", lastYear);
     // console.log("earlyYear:", earlyYear);
@@ -101,6 +102,11 @@ function Index(props) {
                 < div className="canvas-container-land" style={{ width: canvasWidth + 10 }}>
                     <MyCanvas {...canvasParam} canvasWidth={canvasWidth} canvasHeight={props.mainContentDivHeight * 0.3} />
                 </div >
+                {
+                    toJS(timeLineState.rulers).map((item, index) => {
+                        return <RefRuler key={item.id} index={index} mode={0} length={canvasWidth} beginYear={timeLineBeginYear} lastYear={lastYear} pxPerYear={pxPerYear} rulerData={item} />
+                    })
+                }
             </div >
             :
             ''

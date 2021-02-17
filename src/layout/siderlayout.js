@@ -66,9 +66,9 @@ class SiderLayout extends React.Component {
                             <Link to="/myhis/map" />
                             Map
                         </Menu.Item>
-                        <Menu.Item key="3" icon={<UploadOutlined />}>
+                        {/* <Menu.Item key="3" icon={<UploadOutlined />}>
                             nav 3
-                        </Menu.Item>
+                        </Menu.Item> */}
                         <Menu.Item key="4" icon={<LogoutOutlined />} className="last-menu" onClick={this.handleLogout}>
                             Logout
                         </Menu.Item>
