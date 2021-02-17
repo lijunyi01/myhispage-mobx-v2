@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Button, Space, Slider, Switch, Select } from 'antd';
+import { Button, Space, Slider, Switch, Select, Tooltip } from 'antd';
 import { observer } from 'mobx-react';
 import timeLineState from '@pages/Home/TimeLine/index.state';
 import AddProjectModal from './AddProjectModal';
 import { toJS } from 'mobx';
+import { EditOutlined } from '@ant-design/icons';
+import { withRouter } from 'react-router-dom';
 // import _ from 'lodash';
 
 const { Option } = Select;
 
-function Index() {
+function Index(props) {
 
     // 控制AddProjectModal的数据
     const [showAddProjModal, setShowAddProjModal] = useState(false);
@@ -39,9 +41,6 @@ function Index() {
     toJS(timeLineState.rulers).forEach(element => {
         children.push(<Option key={element.id}>{element.rulerName}</Option>);
     });
-    // for (let i = 10; i < 36; i++) {
-    //     children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-    // }
 
     return (
         <Space>
@@ -50,6 +49,7 @@ function Index() {
             <Select
                 mode="multiple"
                 allowClear
+                showArrow
                 style={{ width: '250px' }}
                 placeholder="请选择历史标尺"
                 defaultValue={[]}
@@ -57,6 +57,9 @@ function Index() {
             >
                 {children}
             </Select>
+            <Tooltip placement="bottom" title="编辑标尺">
+                <Button type="primary" shape="round" icon={<EditOutlined />} size="small" onClick={() => { props.history.push({ pathname: '/myhis/refruler', state: { from: '/myhis/timeline' } }); }} />
+            </Tooltip>
             <div style={{ width: "40px" }} />
             <div>像素/年:</div>
             <div style={{ width: "100px" }}>
@@ -78,4 +81,4 @@ function Index() {
     )
 }
 
-export default observer(Index);
+export default withRouter(observer(Index));

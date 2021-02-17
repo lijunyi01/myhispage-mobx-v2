@@ -33,7 +33,11 @@ export const privateRoutes = [
   },
   {
     path: '/myhis/map',
-    // component: HisMap
     component: lazy(() => import('@pages/Home/HisMap'))
+  },
+  {
+    // 该项不对应单独的菜单，还是在“TimeLine”菜单项下
+    path: '/myhis/refruler',
+    component: lazy(() => import('@pages/Home/TimeLine/EditRuler'))
   },
 ];
