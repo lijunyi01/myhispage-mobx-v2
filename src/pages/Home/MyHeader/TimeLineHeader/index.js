@@ -30,7 +30,7 @@ function Index() {
 
     // 历史标尺多选框改变内容
     const handleSelectChange = values => {
-        console.log("selected:", values);
+        // console.log("selected:", values);
         timeLineState.generateSelectedRulers(values);
 
     };

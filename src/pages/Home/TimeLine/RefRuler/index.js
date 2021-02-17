@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './index.less';
 
 const RulerItem = ({ index, mode, stage, beginYear, lastYear, pxPerYear, rulerSYear, rulerEYear }) => {
-    console.log("lastYear:", lastYear);
+    // console.log("lastYear:", lastYear);
     if (stage.endyear > beginYear && stage.startyear < lastYear) {
         let length = 0;
         if (stage.startyear < beginYear) {
