@@ -80,7 +80,7 @@ function Index() {
                             title={item.projectname}
                             description={item.projectdes}
                         />
-                        {item.content}
+                        {/* {item.content} */}
                     </List.Item>
                 )}
             >

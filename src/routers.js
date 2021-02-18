@@ -38,6 +38,6 @@ export const privateRoutes = [
   {
     // 该项不对应单独的菜单，还是在“TimeLine”菜单项下
     path: '/myhis/refruler',
-    component: lazy(() => import('@pages/Home/TimeLine/EditRuler'))
+    component: lazy(() => import('@pages/Home/EditRuler'))
   },
 ];

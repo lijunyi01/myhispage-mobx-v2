@@ -61,6 +61,8 @@ class timeLineState {
     rulers = [];
     // 选中的标尺数据
     selectedRulers = [];
+    // 当前ruler id
+    activedRulerId = -1;
 
     setMainContentDivWidth = newValue => {
         this.mainContentDivWidth = newValue;
@@ -101,6 +103,11 @@ class timeLineState {
     setRulers = newValue => {
         this.rulers = newValue;
     }
+    setActivedRulerId = newValue => {
+        this.activedRulerId = newValue;
+    }
+
+
     generateSelectedRulers = selectedKeys => {
         if (selectedKeys.length > 0) {
             this.selectedRulers = this.rulers.filter(item => {
@@ -199,10 +206,13 @@ class timeLineState {
         })
     }
 
-    getRulersMethod = () => {
+    getRulersMethod = (firstAsActive = false) => {
         getRulers().then(res => {
             if (res.status === 0) {
                 this.setRulers(res.rulers);
+                if (this.activedRulerId === -1 || firstAsActive) {
+                    this.setActivedRulerId(res.rulers[0].id);
+                }
             }
         })
     }
