@@ -11,6 +11,7 @@ const {
     addTip,            // 新增Tip
     deleteTip,          // 删除Tip
     getRulers,         // 获取标尺数据
+    createRuler,       // 新建标尺
 } = server;
 
 class timeLineState {
@@ -213,6 +214,16 @@ class timeLineState {
                 if (this.activedRulerId === -1 || firstAsActive) {
                     this.setActivedRulerId(res.rulers[0].id);
                 }
+            }
+        })
+    }
+
+    createRulerMethod = (data, callback) => {
+        createRuler(data).then(res => {
+            if (res.status === 0) {
+                // console.log("add project successly");
+                this.getRulersMethod(true);
+                callback();
             }
         })
     }

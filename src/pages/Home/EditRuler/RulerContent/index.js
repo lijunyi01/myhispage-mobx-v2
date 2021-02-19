@@ -4,7 +4,7 @@ import { Table, Button } from 'antd';
 import { toJS } from 'mobx';
 import timeLineState from '@pages/Home/TimeLine/index.state';
 
-function index() {
+function Index() {
 
     const getRulerStages = () => {
         const tmpItems = toJS(timeLineState.rulers).filter(item => {
@@ -57,9 +57,19 @@ function index() {
 
     return (
         <div>
-            <Table dataSource={rulerStages} rowKey="id" columns={columns} bordered scroll={{ y: 400 }} pagination={false} />
+            <Table
+                dataSource={rulerStages}
+                rowKey="id"
+                columns={columns}
+                bordered
+                scroll={{ y: 400 }}
+                pagination={false}
+                title={() => { return <h2>标尺项目信息</h2> }}
+                footer={() => { return <Button type="primary">Add Row</Button> }}
+
+            />
         </div>
     )
 }
 
-export default index
+export default Index

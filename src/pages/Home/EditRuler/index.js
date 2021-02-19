@@ -1,6 +1,6 @@
 import React from 'react';
 import RulerList from './RulerList';
-import RulerContent from './RulerContent';
+import RulerContent from './RulerContent/index2';
 import './index.less';
 
 

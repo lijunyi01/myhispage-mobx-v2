@@ -9,6 +9,7 @@ const deleteProjectItemUrl = '/appinterface/deleteProjectItem';
 const addTipUrl = '/appinterface/addTip';
 const deleteTipUrl = '/appinterface/deleteTip';
 const getRulersUrl = '/appinterface/getRulers';
+const createRulerUrl = '/appinterface/createRuler';
 
 class Services {
 
@@ -90,6 +91,15 @@ class Services {
             url: getRulersUrl,
             method: 'post',
             data: {}
+        })
+    }
+
+    // 新建标尺
+    createRuler = data => {
+        return request({
+            url: createRulerUrl,
+            method: 'post',
+            data
         })
     }
 

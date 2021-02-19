@@ -40,7 +40,7 @@ class SiderLayout extends React.Component {
         // console.log(this.props.location)
         let pathName = this.props.location.pathname;
         // console.log(pathName);
-        if (pathName === "/myhis/timeline" || pathName === "/myhis") {
+        if (pathName === "/myhis/timeline" || pathName === "/myhis" || pathName === "/myhis/refruler") {
             return ['1'];
         } else if (pathName === "/myhis/map") {
             return ['2'];
@@ -53,10 +53,9 @@ class SiderLayout extends React.Component {
         return (
             <Layout id="sidelayout">
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-                    <div className="logo">
-                        {/* <img src={Logo} /> */}
+                    <div className={this.state.collapsed ? "logo" : "logo2"}>
                     </div>
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={this.whichSelected()}>
+                    <Menu theme="dark" mode="inline" selectedKeys={this.whichSelected()}>
                         {/* <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}> */}
                         <Menu.Item key="1" icon={<FieldTimeOutlined />}>
                             <Link to="/myhis/timeline" />
