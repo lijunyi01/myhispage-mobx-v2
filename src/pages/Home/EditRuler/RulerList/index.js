@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { List, Space, Avatar } from 'antd';
+import { List, Space, Avatar, Modal } from 'antd';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import timeLineState from '@pages/Home/TimeLine/index.state';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import avatarIcon from '@assets/icon/ruler.png';
 
 // 定义了一个小的函数式组件
@@ -28,7 +28,22 @@ function Index() {
 
     const handleEditClick = () => { }
     // const handleAddProjItemClick = () => { }
-    const handleDeleteClick = () => { }
+    const handleDeleteClick = id => {
+        Modal.confirm({
+            title: '确认删除吗?',
+            icon: <ExclamationCircleOutlined />,
+            content: '',
+            okText: '是',
+            okType: 'danger',
+            cancelText: '否',
+            onOk: () => {
+                timeLineState.deleteRulerMethod(id);
+            }
+            ,
+            onCancel() {
+            },
+        });
+    }
     const handleClick = id => {
         timeLineState.setActivedRulerId(id)
     }

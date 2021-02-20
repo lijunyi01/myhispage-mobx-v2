@@ -10,6 +10,10 @@ const addTipUrl = '/appinterface/addTip';
 const deleteTipUrl = '/appinterface/deleteTip';
 const getRulersUrl = '/appinterface/getRulers';
 const createRulerUrl = '/appinterface/createRuler';
+const deleteRulerUrl = '/appinterface/deleteRuler';
+const createRulerItemrUrl = '/appinterface/createRulerItem';
+const deleteRulerItemrUrl = '/appinterface/deleteRulerItem';
+const updateRulerItemrUrl = '/appinterface/updateRulerItem';
 
 class Services {
 
@@ -98,6 +102,42 @@ class Services {
     createRuler = data => {
         return request({
             url: createRulerUrl,
+            method: 'post',
+            data
+        })
+    }
+
+    // 删除标尺
+    deleteRuler = id => {
+        return request({
+            url: deleteRulerUrl,
+            method: 'post',
+            data: { 'rulerId': id }
+        })
+    }
+
+    // 增加标尺中的项目
+    createRulerItem = data => {
+        return request({
+            url: createRulerItemrUrl,
+            method: 'post',
+            data
+        })
+    }
+
+    // 删除标尺中的项目
+    deleteRulerItem = (rulerId, itemId) => {
+        return request({
+            url: deleteRulerItemrUrl,
+            method: 'post',
+            data: { 'rulerId': rulerId, 'itemId': itemId }
+        })
+    }
+
+    // 增加标尺中的项目
+    updateRulerItem = data => {
+        return request({
+            url: updateRulerItemrUrl,
             method: 'post',
             data
         })

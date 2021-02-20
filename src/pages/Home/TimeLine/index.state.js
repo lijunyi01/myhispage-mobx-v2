@@ -12,6 +12,10 @@ const {
     deleteTip,          // 删除Tip
     getRulers,         // 获取标尺数据
     createRuler,       // 新建标尺
+    deleteRuler,       // 删除标尺
+    createRulerItem,    // 增加标尺中的项目
+    deleteRulerItem,    // 删除标尺中的项目
+    updateRulerItem,    // 修改标尺中的项目
 } = server;
 
 class timeLineState {
@@ -60,6 +64,8 @@ class timeLineState {
     ];
     // 标尺数据
     rulers = [];
+    // 数组rulers变化的标志（rulers数组深层次的变化不会被浅比较比较出来）
+    rulersChangeFlag = true;
     // 选中的标尺数据
     selectedRulers = [];
     // 当前ruler id
@@ -100,6 +106,9 @@ class timeLineState {
     }
     toogleLayoutMenuModelFlag = () => {
         this.layoutMenuModelFlag = !this.layoutMenuModelFlag;
+    }
+    toogleRulersChangeFlag = () => {
+        this.rulersChangeFlag = !this.rulersChangeFlag;
     }
     setRulers = newValue => {
         this.rulers = newValue;
@@ -211,6 +220,7 @@ class timeLineState {
         getRulers().then(res => {
             if (res.status === 0) {
                 this.setRulers(res.rulers);
+                this.toogleRulersChangeFlag();
                 if (this.activedRulerId === -1 || firstAsActive) {
                     this.setActivedRulerId(res.rulers[0].id);
                 }
@@ -224,6 +234,40 @@ class timeLineState {
                 // console.log("add project successly");
                 this.getRulersMethod(true);
                 callback();
+            }
+        })
+    }
+
+    deleteRulerMethod = rulerId => {
+        deleteRuler(rulerId).then(res => {
+            if (res.status === 0) {
+                // console.log("add project successly");
+                this.getRulersMethod(true);
+            }
+        })
+    }
+
+    createRulerItemMethod = (data, callback) => {
+        createRulerItem(data).then(res => {
+            if (res.status === 0) {
+                this.getRulersMethod();
+                callback();
+            }
+        })
+    }
+
+    deleteRulerItemMethod = (rulerId, itemId) => {
+        deleteRulerItem(rulerId, itemId).then(res => {
+            if (res.status === 0) {
+                this.getRulersMethod();
+            }
+        })
+    }
+
+    updateRulerItemMethod = (data) => {
+        updateRulerItem(data).then(res => {
+            if (res.status === 0) {
+                this.getRulersMethod();
             }
         })
     }
