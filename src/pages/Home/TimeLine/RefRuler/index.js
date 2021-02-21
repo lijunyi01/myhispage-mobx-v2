@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './index.less';
 
-const RulerItem = ({ index, mode, stage, beginYear, lastYear, pxPerYear, rulerSYear, rulerEYear }) => {
-    // console.log("lastYear:", lastYear);
-    if (stage.endyear > beginYear && stage.startyear < lastYear) {
+const RulerItem = ({ index, mode, stage, beginYear, endYear, pxPerYear, rulerSYear, rulerEYear }) => {
+    // console.log("endYear:", endYear);
+    let endFlag = false;
+    if (stage.endyear > beginYear && stage.startyear < endYear) {
         let length = 0;
         if (stage.startyear < beginYear) {
             length = (stage.endyear - beginYear) * pxPerYear;
+        } else if (stage.endyear > endYear) {
+            length = (endYear - stage.startyear) * pxPerYear;
+            endFlag = true;
         } else {
             length = (stage.endyear - stage.startyear) * pxPerYear;
         }
 
         if (index === 0 && rulerSYear > beginYear) {
             const margin = (rulerSYear - beginYear) * pxPerYear;
-            return <div className="ruleritem" style={mode === 0 ? { 'width': length, 'marginLeft': margin } : { 'height': length, 'marginTop': margin }}> {stage.itemname}</div>
+            return <div className={endFlag ? "ruleritemend" : "ruleritem"} style={mode === 0 ? { 'width': length, 'marginLeft': margin } : { 'height': length, 'marginTop': margin }}> {stage.itemname}</div>
         } else {
-            return <div className="ruleritem" style={mode === 0 ? { 'width': length } : { 'height': length }}> {stage.itemname}</div>
+            return <div className={endFlag ? "ruleritemend" : "ruleritem"} style={mode === 0 ? { 'width': length } : { 'height': length }}> {stage.itemname}</div>
         }
 
     } else {
@@ -52,10 +56,15 @@ function Index(props) {
             }
         }
     }
+
+    const rulerLength = props.length - 50;   // 时间轴（除箭头外矩形部分的长度）props.length = canvasWidth
+    // 标尺展示区域的最大年份（不是标尺本身的最大年份）
+    const maxYear = props.beginYear + rulerLength / props.pxPerYear;
+    console.log("maxYear:", maxYear);
     return (
         props.mode === 0 ?
             <div className="ref-ruler-land"
-                style={{ 'width': props.length - 50, 'top': topPos }}
+                style={{ 'width': rulerLength, 'top': topPos }}
                 onMouseDown={() => { setMouseDownFlag(true) }}
                 onMouseUp={() => { setMouseDownFlag(false) }}
                 onMouseOver={() => { setMouseDownFlag(false) }}
@@ -64,14 +73,14 @@ function Index(props) {
                 {
                     props.rulerData.stages.map((item, index) => {
                         // return <div className="ruleritem">{item.name}</div>
-                        return <RulerItem key={index} mode={props.mode} index={index} stage={item} rulerSYear={props.rulerData.rulerSYear} rulerEYear={props.rulerData.rulerEYear} beginYear={props.beginYear} lastYear={props.lastYear} pxPerYear={props.pxPerYear} />
+                        return <RulerItem key={index} mode={props.mode} index={index} stage={item} rulerSYear={props.rulerData.rulerSYear} rulerEYear={props.rulerData.rulerEYear} beginYear={props.beginYear} endYear={maxYear} pxPerYear={props.pxPerYear} />
                     })
                 }
 
             </div>
             :
             <div className="ref-ruler"
-                style={{ 'height': props.length - 50, 'left': leftPos }}
+                style={{ 'height': rulerLength, 'left': leftPos }}
                 onMouseDown={() => { setMouseDownFlag(true) }}
                 onMouseUp={() => { setMouseDownFlag(false) }}
                 onMouseOver={() => { setMouseDownFlag(false) }}
@@ -80,7 +89,7 @@ function Index(props) {
                 {
                     props.rulerData.stages.map((item, index) => {
                         // return <div className="ruleritem">{item.name}</div>
-                        return <RulerItem key={index} mode={props.mode} index={index} stage={item} rulerSYear={props.rulerData.rulerSYear} rulerEYear={props.rulerData.rulerEYear} beginYear={props.beginYear} lastYear={props.lastYear} pxPerYear={props.pxPerYear} />
+                        return <RulerItem key={index} mode={props.mode} index={index} stage={item} rulerSYear={props.rulerData.rulerSYear} rulerEYear={props.rulerData.rulerEYear} beginYear={props.beginYear} endYear={maxYear} pxPerYear={props.pxPerYear} />
                     })
                 }
 
