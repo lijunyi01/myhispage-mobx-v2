@@ -5,6 +5,7 @@ const getProjectItemsUrl = '/appinterface/getProjectItems';
 const createProjectUrl = '/appinterface/createProject';
 const deleteProjectUrl = '/appinterface/deleteProject';
 const createProjectItemUrl = '/appinterface/createProjectItem';
+const updateProjectItemUrl = '/appinterface/updateProjectItem';
 const deleteProjectItemUrl = '/appinterface/deleteProjectItem';
 const addTipUrl = '/appinterface/addTip';
 const deleteTipUrl = '/appinterface/deleteTip';
@@ -57,6 +58,15 @@ class Services {
     createProjectItem = data => {
         return request({
             url: createProjectItemUrl,
+            method: 'post',
+            data
+        })
+    }
+
+    // 修改项目的一个事件
+    updateProjectItem = data => {
+        return request({
+            url: updateProjectItemUrl,
             method: 'post',
             data
         })

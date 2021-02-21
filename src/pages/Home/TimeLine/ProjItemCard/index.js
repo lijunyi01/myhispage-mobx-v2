@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './index.less';
 import { Tooltip, Space, Modal } from 'antd'
-import { EditOutlined, DeleteOutlined, LikeOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, FormOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import ItemTip from './ItemTip';
 import timeLineState from '../index.state';
 import EditTipModal from './EditTipModal';
+import EditModal from './EditModal';
 
 const IconText = ({ icon, text, handler }) => (
     <Space>
@@ -18,12 +19,15 @@ const IconText = ({ icon, text, handler }) => (
 function Index(props) {
 
     const [showEditTipModalFlag, setShowEditTipModalFlag] = useState(false);
+    const [showEditModalFlag, setShowEditModalFlag] = useState(false);
 
     let { cardParam, leftPos, topPos } = props;
 
-    const handleClick = () => { };
+    // const handleClick = () => { };
 
-    const handleEditClick = () => { setShowEditTipModalFlag(true) };
+    const handleEditClick = () => { setShowEditModalFlag(true) };
+
+    const handleEditTipClick = () => { setShowEditTipModalFlag(true) };
 
     const handleDeleteClick = () => {
         Modal.confirm({
@@ -79,21 +83,21 @@ function Index(props) {
 
 
             <div className="itemButtons">
-                <Tooltip placement="bottom" title="Edit-Tips">
+                <Tooltip placement="bottom" title="Edit">
                     <div className="button" >
                         <IconText icon={EditOutlined} text="" key="edit-" handler={handleEditClick} />
                     </div>
                 </Tooltip>
-                <Tooltip placement="bottom" title="">
+                <Tooltip placement="bottom" title="Edit-Tips">
                     <div className="button" >
-                        <IconText icon={LikeOutlined} text="" key="like-" handler={handleClick} />
+                        <IconText icon={FormOutlined} text="" key="like-" handler={handleEditTipClick} />
                     </div>
                 </Tooltip>
-                <Tooltip placement="bottom" title="">
+                {/* <Tooltip placement="bottom" title="">
                     <div className="button" >
                         <IconText icon={LikeOutlined} text="" key="like2-" handler={handleClick} />
                     </div>
-                </Tooltip>
+                </Tooltip> */}
                 <Tooltip placement="bottom" title="Delete">
                     <div className="button" >
                         <IconText icon={DeleteOutlined} text="" key="delete-" handler={handleDeleteClick} />
@@ -101,6 +105,15 @@ function Index(props) {
                 </Tooltip>
             </div>
             <EditTipModal showFlag={showEditTipModalFlag} onClose={() => { setShowEditTipModalFlag(false) }} projectId={timeLineState.activedProjectId} itemId={cardParam.itemId} />
+            <EditModal showFlag={showEditModalFlag} nianhaoList={timeLineState.nianhaoList}
+                onClose={() => { setShowEditModalFlag(false) }}
+                itemInfo={cardParam}
+                onSubmit={param => {
+                    timeLineState.updateProjectItemMethod(
+                        { ...param, 'projectId': timeLineState.activedProjectId },
+                        () => { setShowEditModalFlag(false) }
+                    )
+                }} />
         </div>
     )
 }

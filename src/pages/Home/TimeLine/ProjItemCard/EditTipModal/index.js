@@ -10,7 +10,7 @@ function Index(props) {
     return (
         <Modal
             visible={props.showFlag}
-            title={"Modify Tip:" + props.projectId + "-" + props.itemId}
+            title={"Modify Tip"}
             onCancel={props.onClose}
             footer={null}
         >

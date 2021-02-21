@@ -6,14 +6,26 @@ const { Option } = Select;
 
 function Index(props) {
 
+    // console.log("iteminfo:", props.itemInfo);
+    let itemTypeOrg = 1;
+    if (props.itemInfo.itemType > 2) {
+        itemTypeOrg = 2;
+    }
+    let yearTypeOrg = 1;
+    if (props.itemInfo.itemType === 2 || props.itemInfo.itemType === 4) {
+        yearTypeOrg = 2;
+    }
+
+
     // 点时间或段时间
-    const [itemType, setItemType] = useState(1);
+    const [itemType, setItemType] = useState(itemTypeOrg);
     // 公元纪年或年号纪年
-    const [yearType, setYearType] = useState(1);
+    const [yearType, setYearType] = useState(yearTypeOrg);
 
     const onFinish = values => {
         // console.log('Ok', values);
         const submitParamOrg = {
+            itemId: props.itemInfo.itemId,
             itemName: values.itemName,
             itemDes: values.itemDes,
             itemType: values.itemType,
@@ -119,30 +131,38 @@ function Index(props) {
     return (
         <Modal
             visible={props.showFlag}
-            title={"Add Project Item"}
+            title={"Edit Project Item"}
             onCancel={props.onClose}
             footer={null}
+            destroyOnClose={true}
         >
             <Form
-                name="Add Project Item"
+                name="Edit Project Item"
                 initialValues={{
-                    itemDes: "",
-                    itemType: 1,
-                    yearType: 1,
+                    itemName: props.itemInfo.itemName,
+                    itemDes: props.itemInfo.itemContent,
+                    itemType: itemTypeOrg,
+                    yearType: yearTypeOrg,
                     // 时间点事件
-                    gongyuan_dian: 'ad',   // 选择公元前/公元后
-                    exactFlag_dian_gongyuan: false,  // 是否确切时间-公元
+                    gongyuan_dian: (props.itemInfo.startYear > 0 ? 'ad' : 'bc'),   // 选择公元前/公元后
+                    exactFlag_dian_gongyuan: (props.itemInfo.startYearNDFlag === 0 ? true : false),  // 是否确切时间-公元
+                    time_dian_gongyuan: Math.abs(props.itemInfo.startYear),
+                    time_dian_nianhao: props.itemInfo.startYear,
                     nianhao_dian: '1',      // 选择年号
-                    exactFlag_dian_nianhao: false,   // 是否确切时间-年号
+                    exactFlag_dian_nianhao: (props.itemInfo.startYearNDFlag === 0 ? true : false),   // 是否确切时间-年号
                     // 时间段事件
-                    gongyuan_duan_start: 'ad',  // 选择公元前/公元后 - 开始时间
-                    gongyuan_duan_end: 'ad',   // 选择公元前/公元后 - 结束时间
+                    gongyuan_duan_start: (props.itemInfo.startYear > 0 ? 'ad' : 'bc'),  // 选择公元前/公元后 - 开始时间
+                    gongyuan_duan_end: (props.itemInfo.endYear > 0 ? 'ad' : 'bc'),   // 选择公元前/公元后 - 结束时间
                     nianhao_duan_start: '1',   // 选择年号 - 开始时间
                     nianhao_duan_end: '1',   // 选择年号 - 结束时间
-                    exactFlag_duan_gongyuan_start: false,  // 是否确切开始时间-公元
-                    exactFlag_duan_gongyuan_end: false,    // 是否确切结束时间-公元
-                    exactFlag_duan_nianhao_start: false,  // 是否确切开始时间-年号
-                    exactFlag_duan_nianhao_end: false,  // 是否确切结束时间-年号
+                    startTime_duan_gongyuan: Math.abs(props.itemInfo.startYear),
+                    endTime_duan_gongyuan: Math.abs(props.itemInfo.endYear),
+                    startTime_duan_nianhao: props.itemInfo.startYear,
+                    endTime_duan_nianhao: props.itemInfo.endYear,
+                    exactFlag_duan_gongyuan_start: (props.itemInfo.startYearNDFlag === 0 ? true : false),  // 是否确切开始时间-公元
+                    exactFlag_duan_gongyuan_end: (props.itemInfo.endYearNDFlag === 0 ? true : false),    // 是否确切结束时间-公元
+                    exactFlag_duan_nianhao_start: (props.itemInfo.startYearNDFlag === 0 ? true : false),  // 是否确切开始时间-年号
+                    exactFlag_duan_nianhao_end: (props.itemInfo.endYearNDFlag === 0 ? true : false),  // 是否确切结束时间-年号
                 }}
                 {...formItemLayout}
                 onFinish={onFinish}

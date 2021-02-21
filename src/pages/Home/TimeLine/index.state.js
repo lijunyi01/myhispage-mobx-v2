@@ -7,6 +7,7 @@ const {
     createProject,    // 创建项目
     deleteProject,    // 删除项目
     createProjectItem,    // 创建新项目的一个事件
+    updateProjectItem,   // 修改项目的一个事件
     deleteProjectItem,    // 删除项目的一个事件
     addTip,            // 新增Tip
     deleteTip,          // 删除Tip
@@ -179,8 +180,20 @@ class timeLineState {
     }
 
     createProjectItemMethod = (data, callback) => {
-        console.log("createProjectItem param:", data);
+        // console.log("createProjectItem param:", data);
         createProjectItem(data).then(res => {
+            if (res.status === 0) {
+                this.getProjectItemsMethod(data.projectId);
+                // 设置canvas重绘标志
+                this.addCanvasChangeCount();
+                callback();
+            }
+        })
+    }
+
+    updateProjectItemMethod = (data, callback) => {
+        // console.log("createProjectItem param:", data);
+        updateProjectItem(data).then(res => {
             if (res.status === 0) {
                 this.getProjectItemsMethod(data.projectId);
                 // 设置canvas重绘标志

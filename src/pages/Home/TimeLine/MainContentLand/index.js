@@ -104,7 +104,7 @@ function Index(props) {
                 </div >
                 {
                     toJS(timeLineState.selectedRulers).map((item, index) => {
-                        return <RefRuler key={item.id} index={index} mode={0} length={canvasWidth} beginYear={timeLineBeginYear} lastYear={lastYear} pxPerYear={pxPerYear} rulerData={item} />
+                        return <RefRuler key={item.id} index={index} mode={0} length={canvasWidth} beginYear={timeLineBeginYear} pxPerYear={pxPerYear} rulerData={item} />
                     })
                 }
             </div >
