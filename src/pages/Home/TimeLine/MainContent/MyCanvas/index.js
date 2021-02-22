@@ -71,7 +71,7 @@ function Index(props) {
             //设置字体样式
             ctx.font = "10px Courier New";
             //设置字体填充颜色和圆点填充颜色
-            ctx.fillStyle = "rgba(255,0,0,0.5)";
+            ctx.fillStyle = "rgba(255,0,0,1)";
             for (let i = 0; i <= yearLength + yearInterval; i = i + yearInterval) {
                 ctx.beginPath();
                 if ((timeLineBeginYear + i) < 0) {
@@ -129,7 +129,13 @@ function Index(props) {
                         ctx.fillStyle = "rgba(0,0,255,0.2)";
                         ctx.strokeStyle = "rgba(0,0,255,1)";
                     } else if (Math.abs(marginLR) === 10) {
-                        ctx.fillStyle = "rgba(0,255,50,0.2)";
+                        ctx.fillStyle = "rgba(254,193,204,0.8)";
+                        ctx.strokeStyle = "rgba(0,255,50,1)";
+                    } else if (Math.abs(marginLR) === 20) {
+                        ctx.fillStyle = "rgba(252,132,74,0.2)";
+                        ctx.strokeStyle = "rgba(0,255,50,1)";
+                    } else if (Math.abs(marginLR) === 30) {
+                        ctx.fillStyle = "rgba(0,0,255,0.2)";
                         ctx.strokeStyle = "rgba(0,255,50,1)";
                     } else {
                         ctx.fillStyle = "rgba(0,0,50,0.2)";

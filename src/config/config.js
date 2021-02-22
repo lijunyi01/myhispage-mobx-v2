@@ -12,8 +12,16 @@ const environmentVariables = {
 const stage = process.env.REACT_APP_STAGE || process.env.NODE_ENV || "development";
 const config = environmentVariables[stage];
 
-export default {
+const conf = {
     ENV_A: '',
     ENV_B: '',
     ...config
 };
+
+// export default {
+//     ENV_A: '',
+//     ENV_B: '',
+//     ...config
+// };
+
+export default conf;

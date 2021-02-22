@@ -27,6 +27,9 @@ function Index(props) {
     // 计算卡片左上角的x坐标（相对于id为 maincontent的父级div）
     let itemInMainParam = {};
 
+    // canvas高度
+    const canvasContainerHeight = props.mainContentDivHeight * 0.4;
+
     const getLeftPos = (index, timeLineBeginYear, pxPerYear) => {
 
         // let { containerState } = this.props;
@@ -50,7 +53,6 @@ function Index(props) {
     const getTopPos = (index, leftPos) => {
 
         const centerY = props.mainContentDivHeight / 2;
-        const canvasContainerHeight = props.mainContentDivHeight * 0.3;
 
         let topPos;
         if (index % 2 === 0) {  // 偶数项，在下边
@@ -100,7 +102,7 @@ function Index(props) {
                 }
 
                 < div className="canvas-container-land" style={{ width: canvasWidth + 10 }}>
-                    <MyCanvas {...canvasParam} canvasWidth={canvasWidth} canvasHeight={props.mainContentDivHeight * 0.3} />
+                    <MyCanvas {...canvasParam} canvasWidth={canvasWidth} canvasHeight={canvasContainerHeight} />
                 </div >
                 {
                     toJS(timeLineState.selectedRulers).map((item, index) => {

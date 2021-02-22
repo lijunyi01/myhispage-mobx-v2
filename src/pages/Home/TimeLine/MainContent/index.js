@@ -24,14 +24,12 @@ function Index(props) {
 
     // 计算卡片左上角的x坐标（相对于id为 maincontent的父级div）
     let itemInMainParam = {};
+    // canvas宽度
+    const canvasContainerWidth = props.mainContentDivWidth * 0.3;
+
     const getLeftPos = (index, topPos) => {
 
-        // 列表区右侧整个区域的宽度，canvas只是其中的30%宽度
-        let { mainContentDivWidth } = props
-        // console.log("mainContentDivWidth", mainContentDivWidth);
-
-        const centerX = mainContentDivWidth / 2;
-        const canvasContainerWidth = mainContentDivWidth * 0.3;
+        const centerX = props.mainContentDivWidth / 2;
 
         let leftPos;
 
@@ -105,7 +103,7 @@ function Index(props) {
                 }
 
                 < div className="canvas-container" style={{ height: canvasHeight + 10 }}>
-                    <MyCanvas {...canvasParam} canvasWidth={props.mainContentDivWidth * 0.3} canvasHeight={canvasHeight} />
+                    <MyCanvas {...canvasParam} canvasWidth={canvasContainerWidth} canvasHeight={canvasHeight} />
                 </div >
                 {
                     toJS(timeLineState.selectedRulers).map((item, index) => {
