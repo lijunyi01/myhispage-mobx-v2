@@ -107,7 +107,7 @@ function Index(props) {
                 </div >
                 {
                     toJS(timeLineState.selectedRulers).map((item, index) => {
-                        console.log("rulerindex:", index);
+                        // console.log("rulerindex:", index);
                         let mode = 1;
                         if (timeLineState.layoutMenuModelFlag && !timeLineState.mainListModelFlag) {
                             // 菜单默认展开 且 mainlist 收起时
