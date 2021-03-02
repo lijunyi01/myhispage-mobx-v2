@@ -36,23 +36,29 @@ function Index(props) {
     const [mouseDownFlag, setMouseDownFlag] = useState(false);
 
     useEffect(() => {
-        // 第一次加载时让不同的标尺错开显示
-        if (props.index > 0) {
-            if (props.mode === 0) {
-                setTopPos(topPos + props.index * 50);
-            } else {
-                setLeftPos(leftPos + props.index * 50);
-            }
+        // console.log("props:", props);
+        // 第一次加载或index变化时让不同的标尺错开显示
+        if (props.mode === 0) {
+            setTopPos(30 + props.index * 50);
+        } else {
+            setLeftPos(30 + props.index * 50);
         }
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    }, [props.index]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onMouseMove = e => {
         if (mouseDownFlag) {
             // console.log(e.nativeEvent);
             if (props.mode === 0) {  // 横屏模式
                 setTopPos(e.nativeEvent.clientY - 100);
-            } else {   // 竖屏模式
-                setLeftPos(e.nativeEvent.clientX - 480);
+            } else if (props.mode === 1) {   // 竖屏模式且菜单和mainlist都展开
+                setLeftPos(e.nativeEvent.clientX - 475);
+            } else if (props.mode === 2) {   // 竖屏模式且菜单展开 且 mainlist收起
+                setLeftPos(e.nativeEvent.clientX - 240);
+            } else if (props.mode === 3) {   // 竖屏模式且菜单收起 且 mainlist展开
+                setLeftPos(e.nativeEvent.clientX - 360);
+            } else {  // 竖屏模式且菜单和mainlist都收起
+                setLeftPos(e.nativeEvent.clientX - 115);
             }
         }
     }
@@ -60,7 +66,7 @@ function Index(props) {
     const rulerLength = props.length - 50;   // 时间轴（除箭头外矩形部分的长度）props.length = canvasWidth
     // 标尺展示区域的最大年份（不是标尺本身的最大年份）
     const maxYear = props.beginYear + rulerLength / props.pxPerYear;
-    console.log("maxYear:", maxYear);
+    // console.log("maxYear:", maxYear);
     return (
         props.mode === 0 ?
             <div className="ref-ruler-land"
@@ -89,6 +95,7 @@ function Index(props) {
                 {
                     props.rulerData.stages.map((item, index) => {
                         // return <div className="ruleritem">{item.name}</div>
+                        // console.log("rulerid:", props.rulerId);
                         return <RulerItem key={index} mode={props.mode} index={index} stage={item} rulerSYear={props.rulerData.rulerSYear} rulerEYear={props.rulerData.rulerEYear} beginYear={props.beginYear} endYear={maxYear} pxPerYear={props.pxPerYear} />
                     })
                 }

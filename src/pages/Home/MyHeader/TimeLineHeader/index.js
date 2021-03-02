@@ -50,10 +50,11 @@ function Index(props) {
                 mode="multiple"
                 allowClear
                 showArrow
-                style={{ width: '250px' }}
+                style={{ width: '200px' }}
                 placeholder="请选择历史标尺"
                 defaultValue={[]}
                 onChange={handleSelectChange}
+                maxTagCount="responsive"
             >
                 {children}
             </Select>

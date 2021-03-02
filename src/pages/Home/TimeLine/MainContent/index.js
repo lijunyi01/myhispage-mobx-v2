@@ -107,7 +107,21 @@ function Index(props) {
                 </div >
                 {
                     toJS(timeLineState.selectedRulers).map((item, index) => {
-                        return <RefRuler key={item.id} index={index} mode={1} length={canvasHeight} beginYear={timeLineBeginYear} pxPerYear={pxPerYear} rulerData={item} />
+                        console.log("rulerindex:", index);
+                        let mode = 1;
+                        if (timeLineState.layoutMenuModelFlag && !timeLineState.mainListModelFlag) {
+                            // 菜单默认展开 且 mainlist 收起时
+                            mode = 2;
+                        } else if (!timeLineState.layoutMenuModelFlag && timeLineState.mainListModelFlag) {
+                            // 菜单收起 且 mainlist 默认展开
+                            mode = 3;
+                        } else if (!timeLineState.layoutMenuModelFlag && !timeLineState.mainListModelFlag) {
+                            // 菜单 和 mainlist 都收起时
+                            mode = 4;
+                        } else {
+                            mode = 1;
+                        }
+                        return <RefRuler key={item.id} index={index} mode={mode} length={canvasHeight} beginYear={timeLineBeginYear} pxPerYear={pxPerYear} rulerData={item} />
                     })
                 }
             </div >
