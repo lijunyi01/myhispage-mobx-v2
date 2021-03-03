@@ -13,8 +13,8 @@ import {
 import './siderlayout.css';
 import { Link, withRouter } from "react-router-dom";
 import { removeToken } from '@utils/auth';
-import MyHeader from '@pages/Home/MyHeader';
-import timeLineState from '@pages/Home/TimeLine/index.state';
+import MyHeader from '@pages/home/myHeader';
+import timeLineState from '@pages/home/timeLine/index.state';
 // import Logo from '@assets/images/logo.png';
 
 const { Header, Sider, Content } = Layout;

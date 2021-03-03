@@ -111,7 +111,7 @@ function index(props) {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Login
                     </Button>
-                    Or <a href="foo">register now!</a>
+                    Or <a href="regist">regist now!</a>
                 </Form.Item>
             </Form>
         </Card>

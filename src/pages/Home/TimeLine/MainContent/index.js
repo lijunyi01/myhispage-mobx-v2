@@ -2,10 +2,10 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import timeLineState from '../index.state';
-import MyCanvas from './MyCanvas';
-import ProjItemCard from '../ProjItemCard';
+import MyCanvas from './myCanvas';
+import ProjItemCard from '../projItemCard';
 import './index.less';
-import RefRuler from '../RefRuler';
+import RefRuler from '../refRuler';
 
 function Index(props) {
     // console.log(props);

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button, Form, InputNumber, Input, Popconfirm, Space } from 'antd';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
-import timeLineState from '@pages/Home/TimeLine/index.state';
-import AddItemModal from './AddItemModal';
+import timeLineState from '@pages/home/timeLine/index.state';
+import AddItemModal from './addItemModal';
 
 function Index() {
 

@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react';
 // import { Spin, Button } from 'antd';
 import timeLineState from './index.state'
-import MainList from './MainList';
-import MainContent from './MainContent';
-import MainContentLand from './MainContentLand';
+import MainList from './mainList';
+import MainContent from './mainContent';
+import MainContentLand from './mainContentLand';
 import _ from 'lodash';
 import './index.less';
 import { MenuUnfoldOutlined, MenuFoldOutlined, } from '@ant-design/icons';

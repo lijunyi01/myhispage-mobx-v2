@@ -7,7 +7,7 @@ import { toJS } from 'mobx';
 import './index.less';
 import locationMarkerIcon from '@assets/icon/mark_b.png';
 import sharpIcon from '@assets/icon/sharp.png';
-import PageLoading from '@com/PageLoading';
+import PageLoading from '@com/pageLoading';
 
 function Index() {
 

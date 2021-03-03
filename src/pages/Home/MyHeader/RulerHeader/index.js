@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Button, Space } from 'antd';
 // import { observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
-import AddRulerModal from './AddRulerModal';
-import timeLineState from '@pages/Home/TimeLine/index.state';
+import AddRulerModal from './addRulerModal';
+import timeLineState from '@pages/home/timeLine/index.state';
 
 function Index(props) {
 

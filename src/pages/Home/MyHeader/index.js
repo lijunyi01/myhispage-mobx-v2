@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import TimeLineHeader from './TimeLineHeader';
-import MapHeader from './MapHeader';
-import RulerHeader from './RulerHeader';
+import TimeLineHeader from './timeLineHeader';
+import MapHeader from './mapHeader';
+import RulerHeader from './rulerHeader';
 
 function Index(props) {
 

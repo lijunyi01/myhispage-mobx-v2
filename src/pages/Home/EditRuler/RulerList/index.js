@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { List, Space, Avatar, Modal } from 'antd';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
-import timeLineState from '@pages/Home/TimeLine/index.state';
+import timeLineState from '@pages/home/timeLine/index.state';
 import { EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import avatarIcon from '@assets/icon/ruler.png';
 

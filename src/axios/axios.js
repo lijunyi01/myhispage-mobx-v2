@@ -2,7 +2,7 @@ import config from '@/config/config';
 import _ from 'lodash';
 // import antdTheme from '../../antdTheme';
 import { message, Modal } from 'antd';
-import loadingState from '@com/ApiLoading/index.state';
+import loadingState from '@com/apiLoading/index.state';
 import { removeToken, getToken, getUmid } from '@utils/auth';
 import axios from 'axios';
 

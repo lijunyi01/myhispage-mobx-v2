@@ -6,7 +6,7 @@ import { EditOutlined, DeleteOutlined, PlusCircleOutlined, ExclamationCircleOutl
 import timeLineState from '../index.state';
 import avatarIcon from '@assets/icon/time.png';
 import './index.less';
-import AddProjectItemModal from './AddProjectItemModal';
+import AddProjectItemModal from './addProjectItemModal';
 
 // 定义了一个小的函数式组件
 const IconText = ({ icon, text, handler }) => (

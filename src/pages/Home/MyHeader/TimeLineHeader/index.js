@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Space, Slider, Switch, Select, Tooltip } from 'antd';
 import { observer } from 'mobx-react';
-import timeLineState from '@pages/Home/TimeLine/index.state';
-import AddProjectModal from './AddProjectModal';
+import timeLineState from '@pages/home/timeLine/index.state';
+import AddProjectModal from './addProjectModal';
 import { toJS } from 'mobx';
 import { EditOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';

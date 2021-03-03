@@ -3,7 +3,7 @@ import React from 'react';
 // import { observer, inject } from 'mobx-react';
 // import { Modal } from 'antd';
 import { Drawer } from 'antd';
-import LocationTree from './LocationTree';
+import LocationTree from './locationTree';
 // import { getTreeData } from '@/axios/api';
 import './index.less';
 

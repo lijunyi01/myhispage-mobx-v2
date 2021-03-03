@@ -8,8 +8,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import moment from "moment";
 import { isLogined } from '@utils/auth';
 import { publicRoutes } from './routers';
-import HomeLayoutAndRoute from '@pages/Home/HomeLayoutAndRoute';
-import ApiLoading from '@com/ApiLoading';
+import HomeLayoutAndRoute from '@pages/home/homeLayoutAndRoute';
+import ApiLoading from '@com/apiLoading';
 
 
 

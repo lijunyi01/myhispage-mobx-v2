@@ -4,7 +4,7 @@ import { privateRoutes } from '@/routers';
 import { Switch, Route, Redirect } from 'react-router-dom';
 // import HisMap from '@pages/Home/HisMap';
 // import TimeLine from '@pages/Home/TimeLine';
-import PageLoading from '@com/PageLoading';
+import PageLoading from '@com/pageLoading';
 
 export default function index(props) {
 

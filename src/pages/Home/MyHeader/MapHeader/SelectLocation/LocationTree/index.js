@@ -4,9 +4,9 @@ import { EditOutlined, ExclamationCircleOutlined, PlusOutlined, DeleteOutlined }
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 // import { EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import mapState from '@pages/Home/HisMap/index.state';
+import mapState from '@pages/home/hisMap/index.state';
 import _ from 'lodash';
-import AddSubLocationModal from '../AddSubLocationModal';
+import AddSubLocationModal from '../addSubLocationModal';
 
 // const { TreeNode } = Tree;
 

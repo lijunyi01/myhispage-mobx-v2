@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Space, Switch } from 'antd';
 import { observer } from 'mobx-react';
-import mapState from '@pages/Home/HisMap/index.state';
-import SelectLocationDrawer from '@pages/Home/MyHeader/MapHeader/SelectLocation';
+import mapState from '@pages/home/hisMap/index.state';
+import SelectLocationDrawer from '@pages/home/myHeader/mapHeader/selectLocation';
 
 function Index() {
 

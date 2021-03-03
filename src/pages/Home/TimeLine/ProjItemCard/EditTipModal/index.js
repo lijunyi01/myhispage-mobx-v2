@@ -1,9 +1,6 @@
 import React from 'react';
 import { Modal } from 'antd';
-// import { observer } from 'mobx-react';
-// import mapState from '@pages/Home/HisMap/index.state';
-// import { ExclamationCircleOutlined } from '@ant-design/icons';
-import EditTip from './EditTip';
+import EditTip from './editTip';
 
 function Index(props) {
 

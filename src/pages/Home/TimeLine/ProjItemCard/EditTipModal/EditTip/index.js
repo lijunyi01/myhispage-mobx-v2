@@ -1,6 +1,6 @@
 import React from 'react';
 import { toJS } from 'mobx';
-import timeLineState from '@pages/Home/TimeLine/index.state';
+import timeLineState from '@pages/home/timeLine/index.state';
 import { Table, Button, Form, Input, Divider, Modal, message } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import _ from 'lodash';

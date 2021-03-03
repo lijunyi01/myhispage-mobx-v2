@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './index.less';
 import { Tooltip, Space, Modal } from 'antd'
 import { EditOutlined, DeleteOutlined, FormOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import ItemTip from './ItemTip';
+import ItemTip from './itemTip';
 import timeLineState from '../index.state';
-import EditTipModal from './EditTipModal';
-import EditModal from './EditModal';
+import EditTipModal from './editTipModal';
+import EditModal from './editModal';
 
 const IconText = ({ icon, text, handler }) => (
     <Space>
