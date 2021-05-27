@@ -43,7 +43,7 @@ function index(props) {
             platform: "web"
         }
         login(param).then(res => {
-            // console.log("login-res:", res)
+            console.log("login-res:", res)
             if (res.status === 0) {
                 setToken(res.token)
                 setUmid(res.umid)

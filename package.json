@@ -55,9 +55,10 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "less": "^4.1.0",
     "less-loader": "5.0.0",
+    "mockjs": "^1.1.0",
     "react-app-rewired": "^2.1.8"
   },
-  "proxy": "http://router.cimba.cn:8091",
+  "proxy": "https://www.51his.cn",
+  "proxy1": "http://router.cimba.cn:8091",
   "proxy2": "http://192.168.8.197:8091"
-
 }
