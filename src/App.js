@@ -43,7 +43,7 @@ function App(props) {
           })}
           {/* HomeLayoutAndRoute 是完成登录验证后展示的页面的父级框架组件；PrivateRoute高阶组件内部进行登录是否完成的判断 */}
           <PrivateRoute path="/myhis" component={HomeLayoutAndRoute} location={props.location} />
-          <Redirect to="/myhis" from="/" />
+          <Redirect to="/myhis" from="/" exact />
           <Redirect to="/404" />
         </Switch>
       </ApiLoading>
