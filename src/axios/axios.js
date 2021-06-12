@@ -5,7 +5,7 @@ import { message, Modal } from 'antd';
 import loadingState from '@com/apiLoading/index.state';
 import { removeToken, getToken, getUmid } from '@utils/auth';
 import axios from 'axios';
-import '../mock/mock';
+// import '../mock/mock';
 
 // 创建axios实例
 const service = axios.create({  //这个service是自定义（你自己起的名字）
